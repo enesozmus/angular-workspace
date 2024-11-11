@@ -6,7 +6,6 @@ div {
 
 button {
   width: 100%;
-  min-width: 10rem;
 
   display: flex;
   align-items: center;
@@ -19,20 +18,13 @@ button {
 }
 
 button:hover,
-button:active,
-.active {
+button:active {
   background-color: #9965dd;
   color: #150722;
 }
 
 img {
-  width: 2rem;
-  object-fit: contain;
+  width: 6rem;
   border-radius: 50%;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
-}
-
-span {
-  margin: 0;
-  padding: 0;
 }
