@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { FirstComponent } from './first/first.component';
 // 🟦
 import { SecondComponent } from './second/second.component';
+import { DatabindingComponent } from './databinding/databinding.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { SecondComponent } from './second/second.component';
     // 🔴
     FirstComponent,
     // 🟦
-    SecondComponent
+    SecondComponent,
+    DatabindingComponent
   ],
   imports: [
     BrowserModule,
