@@ -15,4 +15,9 @@ export class UserComponent {
   get imagePath() {
     return 'users/' + this.selectedUser.avatar;
   }
+
+  // Listening to Events with Event Binding
+  onSelectUser() {
+    console.log('Clicked!');
+  }
 }
