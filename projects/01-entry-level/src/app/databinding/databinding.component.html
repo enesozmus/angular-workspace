@@ -10,7 +10,7 @@
 
 
 
-<h2>🟧 Property Binding 🟧</h2>
+<h2>🟧 Property Binding & Event Binding 🟧</h2>
 
 <img [src]="imgURL" alt="random-lorem-picsum" />
 <p [innerText]="allowNewServer"></p>
@@ -20,3 +20,9 @@
 <button class="btn btn-primary" [class.disabled]="!allowNewServer" (click)="onCreateServer()">
   Add Server
 </button>
+
+<h2>🟧 Passing and Using Data with Event Binding 🟧</h2>
+
+<label for="">Server Name</label>
+<input type="text" (input)="onUpdateServerName($event)">
+<p [innerText]="serverName"></p>
