@@ -1,4 +1,21 @@
 <h1>Data Binding in Angular</h1>
+
+
+
+<h2>🟧 String Interpolation 🟧</h2>
+
 <p>Server with ID ___ is ___.</p>
-<p>{{'Server'}} with ID {{ serverID }} is {{serverStatus}}.</p>
-<p>{{'Server'}} with ID {{ serverID }} is {{getServerStatus()}}.</p>
+<p>{{ 'Server' }} with ID {{ serverID }} is {{ serverStatus }}.</p>
+<p>{{ 'Server' }} with ID {{ serverID }} is {{ getServerStatus() }}.</p>
+
+
+
+<h2>🟧 Property Binding 🟧</h2>
+
+<img [src]="imgURL" alt="random-lorem-picsum" />
+<p [innerText]="allowNewServer"></p>
+
+<!-- <button class="btn btn-primary">Add Server</button> -->
+<button class="btn btn-primary" [class.disabled]="!allowNewServer">
+  Add Server
+</button>
