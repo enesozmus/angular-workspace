@@ -14,8 +14,9 @@
 
 <img [src]="imgURL" alt="random-lorem-picsum" />
 <p [innerText]="allowNewServer"></p>
+<p [innerText]="serverCreationStatus"></p>
 
 <!-- <button class="btn btn-primary">Add Server</button> -->
-<button class="btn btn-primary" [class.disabled]="!allowNewServer">
+<button class="btn btn-primary" [class.disabled]="!allowNewServer" (click)="onCreateServer()">
   Add Server
 </button>

@@ -23,4 +23,11 @@ export class DatabindingComponent {
       this.allowNewServer = true;
     }, 2000);
   }
+
+  // Databinding - Event Binding
+  serverCreationStatus = 'No server was created!';
+
+  onCreateServer() {
+    this.serverCreationStatus = 'Server was created';
+  }
 }
