@@ -38,4 +38,7 @@ export class DatabindingComponent {
     console.log(event);
     this.serverName = (<HTMLInputElement>event.target).value;
   }
+
+  // 🟦 Databinding - Two-Way Binding
+  location = 'mudanya';
 }

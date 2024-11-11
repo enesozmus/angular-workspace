@@ -26,3 +26,8 @@
 <label for="">Server Name</label>
 <input type="text" (input)="onUpdateServerName($event)">
 <p [innerText]="serverName"></p>
+
+
+<h2>🟧 Databinding - Two-Way Binding 🟧</h2>
+<input type="text" [(ngModel)]="location">
+<p [innerText]="location"></p>

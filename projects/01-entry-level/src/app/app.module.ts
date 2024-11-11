@@ -8,6 +8,7 @@ import { FirstComponent } from './first/first.component';
 // 🟦
 import { SecondComponent } from './second/second.component';
 import { DatabindingComponent } from './databinding/databinding.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,13 +17,15 @@ import { DatabindingComponent } from './databinding/databinding.component';
     FirstComponent,
     // 🟦
     SecondComponent,
-    DatabindingComponent
+    DatabindingComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    // 🟢 Databinding - Two-Way Binding
+    FormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
