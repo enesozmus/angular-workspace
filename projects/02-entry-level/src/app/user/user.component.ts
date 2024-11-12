@@ -4,6 +4,7 @@ import {
   EventEmitter,
   input,
   Input,
+  output,
   Output,
   signal,
 } from '@angular/core';
@@ -61,7 +62,8 @@ export class UserComponent {
   @Input({ required: true }) id!: string;
 
   // 🟦 Outputs & Emitting Data
-  @Output() select = new EventEmitter();
+  // @Output() select = new EventEmitter();
+  @Output() select = new EventEmitter<string>();
 
   // location = 'fransa';
   onEmitTheIdOfTheSelectedUser() {
@@ -74,5 +76,6 @@ export class UserComponent {
   //    this.select.emit(this.param);
   // }
 
-  // 🟦 Signal Outputs v16
+  // 🟦 the output() function
+  select2 = output<string>(); // → You can use outputs to emit values to parent directives and component.
 }
