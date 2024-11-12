@@ -5,3 +5,11 @@
     <span>{{ selectedUser.name }}</span>
   </button>
 </div>
+
+<!-- 🟦 Signals v16 -->
+<div>
+  <button (click)="onSelectUser2()">
+    <img [src]="imagePath2()" [alt]="selectedUser2().name" />
+    <span>{{ selectedUser2().name }}</span>
+  </button>
+</div>
