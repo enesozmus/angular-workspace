@@ -8,11 +8,21 @@ import { DUMMY_USERS } from './user/dummy-users';
 })
 export class AppComponent {
   users = DUMMY_USERS;
+  selectedUserId = 'u1';
 
   // 🟦 Outputs & Emitting Data
   // catch the emitting event
   onSelectUser(id: string) {
-    console.log('Selected user with id ' + id);
-    console.log('🟢 Clicked!');
+    this.selectedUserId = id;
+  }
+
+  get selectedUser() {
+    return this.users.find((user) => user.id === this.selectedUserId)!;
+
+    // {
+    //   id: string;
+    //   name: string;
+    //   avatar: string;
+    // }
   }
 }
