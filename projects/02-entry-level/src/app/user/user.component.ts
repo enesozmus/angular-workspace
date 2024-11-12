@@ -1,4 +1,12 @@
-import { Component, computed, input, Input, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  EventEmitter,
+  input,
+  Input,
+  Output,
+  signal,
+} from '@angular/core';
 import { DUMMY_USERS } from './dummy-users';
 
 const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
@@ -17,7 +25,7 @@ export class UserComponent {
   }
 
   // 🟦 Listening to Events with Event Binding
-  onSelectUser() {
+  onGetARandomUser() {
     console.log('Clicked!');
     const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
     this.selectedUser = DUMMY_USERS[randomIndex];
@@ -27,7 +35,7 @@ export class UserComponent {
   selectedUser2 = signal(DUMMY_USERS[randomIndex]);
   imagePath2 = computed(() => 'users/' + this.selectedUser2().avatar); // → Create a computed `Signal` which derives a reactive value from an expression.
 
-  onSelectUser2() {
+  onGetARandomUser2() {
     const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
     this.selectedUser2.set(DUMMY_USERS[randomIndex]);
   }
@@ -48,4 +56,23 @@ export class UserComponent {
   // imagePath4 = computed(() => {
   //   return 'users/' + this.avatar;
   // });
+
+  // Inputs - Get ID
+  @Input({ required: true }) id!: string;
+
+  // 🟦 Outputs & Emitting Data
+  @Output() select = new EventEmitter();
+
+  // location = 'fransa';
+  onEmitTheIdOfTheSelectedUser() {
+    // this.select.emit();
+    // this.select.emit(this.location);
+    this.select.emit(this.id);
+  }
+
+  // onEmitTheIdOfTheSelectedUser(param: any) {
+  //    this.select.emit(this.param);
+  // }
+
+  // 🟦 Signal Outputs v16
 }
