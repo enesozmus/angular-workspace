@@ -8,6 +8,7 @@ import { Component, Input } from '@angular/core';
 export class TasksComponent {
   @Input({ required: true }) name!: string;
   @Input({ required: true }) userId!: string;
+  isAddingTask = false;
 
   dummyTasks = [
     {
@@ -50,5 +51,13 @@ export class TasksComponent {
 
   onCompleteTask(id: string) {
     this.dummyTasks = this.dummyTasks.filter((task) => task.id !== id);
+  }
+
+  onStartAddTask() {
+    this.isAddingTask = true;
+  }
+
+  onCancelAddTask() {
+    this.isAddingTask = false;
   }
 }
