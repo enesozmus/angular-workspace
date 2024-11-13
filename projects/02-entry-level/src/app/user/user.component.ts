@@ -12,6 +12,18 @@ import { DUMMY_USERS } from './dummy-users';
 
 const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 
+// type User = {
+//   id: string;
+//   avatar: string;
+//   name: string;
+// }
+
+interface User {
+  id: string;
+  avatar: string;
+  name: string;
+}
+
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -55,7 +67,7 @@ export class UserComponent {
 
   //
   // 🟦🟦 Signal Inputs v16
-  avatar2 = input.required<string>();
+  // avatar2 = input.required<string>();
   // name2 = input.required<string>();
   // template → → name2(), avatar2()
   // parent template → → same approach
@@ -88,12 +100,16 @@ export class UserComponent {
 
   //
   // 🟦🟦 Accepting Objects As Inputs & Adding Appropriate Typings
-  @Input({ required: true }) user!: {
-    id: string;
-    name: string;
-    avatar: string;
-  };
+  // @Input({ required: true }) user!: {
+  //   id: string;
+  //   name: string;
+  //   avatar: string;
+  // };
   // this.user.id
   // this.user.avatar
   // [user]="users[0]"
+
+  //
+  // 🟦🟦 TypeScript: Type Aliases & Interfaces
+  // @Input({ required: true }) user!: User;
 }
