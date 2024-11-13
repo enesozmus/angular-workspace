@@ -8,7 +8,10 @@ import { DUMMY_USERS } from './user/dummy-users';
 })
 export class AppComponent {
   users = DUMMY_USERS;
-  selectedUserId = 'u1';
+
+  //
+  // selectedUserId = 'u1';
+  selectedUserId: string | undefined;
 
   // 🟦 Outputs & Emitting Data
   // catch the emitting event

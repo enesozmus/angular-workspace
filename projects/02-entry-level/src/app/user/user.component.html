@@ -1,12 +1,18 @@
 <div>
   <button (click)="onEmitTheIdOfTheSelectedUser()">
-    <img [src]="imagePath3" [alt]="name" />
-    <span>{{ name }}</span>
+    <img [src]="imagePath4" [alt]="user.name" />
+    <span>{{ user.name }}</span>
   </button>
 </div>
 
-<!-- <img [src]="'users/' + selectedUser.avatar" [alt]="selectedUser.name" /> -->
+<!-- <div>
+  <button (click)="onEmitTheIdOfTheSelectedUser()">
+    <img [src]="imagePath3" [alt]="name" />
+    <span>{{ name }}</span>
+  </button>
+</div> -->
 
+<!-- <img [src]="'users/' + selectedUser.avatar" [alt]="selectedUser.name" /> -->
 
 <!-- <div>
   <button (click)="onGetARandomUser()">

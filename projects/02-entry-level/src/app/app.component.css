@@ -14,3 +14,8 @@ main {
 
   list-style: none;
 }
+
+#fallback {
+  font-size: 2.15rem;
+  font-weight: bold;
+}

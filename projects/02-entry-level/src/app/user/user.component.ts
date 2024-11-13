@@ -58,12 +58,12 @@ export class UserComponent {
 
   //
   // 🟦🟦 Inputs
-  @Input({ required: true }) avatar!: string; // Decorator that marks a class field as an input property and supplies configuration metadata.
-  @Input({ required: true }) name!: string;
+  // @Input({ required: true }) avatar!: string; // Decorator that marks a class field as an input property and supplies configuration metadata.
+  // @Input({ required: true }) name!: string;
 
-  get imagePath3() {
-    return 'users/' + this.avatar;
-  }
+  // get imagePath3() {
+  //   return 'users/' + this.avatar;
+  // }
 
   //
   // 🟦🟦 Signal Inputs v16
@@ -111,5 +111,9 @@ export class UserComponent {
 
   //
   // 🟦🟦 TypeScript: Type Aliases & Interfaces
-  // @Input({ required: true }) user!: User;
+  @Input({ required: true }) user!: User;
+
+  get imagePath4() {
+    return 'users/' + this.user.avatar;
+  }
 }
