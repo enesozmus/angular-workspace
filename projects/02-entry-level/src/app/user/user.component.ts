@@ -117,4 +117,6 @@ export class UserComponent {
   get imagePath4() {
     return 'users/' + this.user.avatar;
   }
+
+  @Input({ required: true }) selected!: boolean;
 }
