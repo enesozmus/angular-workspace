@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+
 import { Task } from './task.model';
+import { TasksService } from '../tasks.service';
 
 // interface Task {
 //   id: string;
@@ -17,8 +19,12 @@ import { Task } from './task.model';
 export class TaskComponent {
   @Input({ required: true }) task!: Task;
 
-  @Output() complete = new EventEmitter<string>();
+  constructor(private tasksService: TasksService) {}
+  // private tasksService = inject(TasksService);
+
+  // @Output() complete = new EventEmitter<string>();
   onCompleteTask() {
-    this.complete.emit(this.task.id);
+    // this.complete.emit(this.task.id);
+    this.tasksService.removeTask(this.task.id);
   }
 }

@@ -8,10 +8,11 @@ import {
   Output,
   signal,
 } from '@angular/core';
-import { DUMMY_USERS } from './dummy-users';
-import { User } from './user.model';
 
-const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
+import { DUMMY_USERS } from './dummy-users';
+import type { User } from './user.model';
+
+// const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 
 // type User = {
 //   id: string;
@@ -31,31 +32,31 @@ const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
   styleUrl: './user.component.css',
 })
 export class UserComponent {
-  selectedUser = DUMMY_USERS[randomIndex];
+  // selectedUser = DUMMY_USERS[randomIndex];
 
   //
   // 🟦🟦 Using Getters For Computed Values
-  get imagePath() {
-    return 'users/' + this.selectedUser.avatar;
-  }
+  // get imagePath() {
+  //   return 'users/' + this.selectedUser.avatar;
+  // }
 
   //
   // 🟦🟦 Listening to Events with Event Binding
-  onGetARandomUser() {
-    console.log('Clicked!');
-    const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
-    this.selectedUser = DUMMY_USERS[randomIndex];
-  }
+  // onGetARandomUser() {
+  //   console.log('Clicked!');
+  //   const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
+  //   this.selectedUser = DUMMY_USERS[randomIndex];
+  // }
 
   //
   // 🟦🟦 Signals v16
-  selectedUser2 = signal(DUMMY_USERS[randomIndex]);
-  imagePath2 = computed(() => 'users/' + this.selectedUser2().avatar); // → Create a computed `Signal` which derives a reactive value from an expression.
+  // selectedUser2 = signal(DUMMY_USERS[randomIndex]);
+  // imagePath2 = computed(() => 'users/' + this.selectedUser2().avatar); // → Create a computed `Signal` which derives a reactive value from an expression.
 
-  onGetARandomUser2() {
-    const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
-    this.selectedUser2.set(DUMMY_USERS[randomIndex]);
-  }
+  // onGetARandomUser2() {
+  //   const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
+  //   this.selectedUser2.set(DUMMY_USERS[randomIndex]);
+  // }
 
   //
   // 🟦🟦 Inputs
@@ -77,19 +78,19 @@ export class UserComponent {
   // });
 
   // Inputs - Get ID
-  @Input({ required: true }) id!: string;
+  // @Input({ required: true }) id!: string;
 
   //
   // 🟦🟦 Outputs & Emitting Data
   // @Output() select = new EventEmitter();
-  @Output() select = new EventEmitter<string>();
+  // @Output() select = new EventEmitter<string>();
 
   // location = 'fransa';
-  onEmitTheIdOfTheSelectedUser() {
-    // this.select.emit();
-    // this.select.emit(this.location);
-    this.select.emit(this.id);
-  }
+  // onEmitTheIdOfTheSelectedUser() {
+  // this.select.emit();
+  // this.select.emit(this.location);
+  // this.select.emit(this.id);
+  // }
 
   // onEmitTheIdOfTheSelectedUser(param: any) {
   //    this.select.emit(this.param);
@@ -97,7 +98,7 @@ export class UserComponent {
 
   //
   // 🟦🟦 the output() function
-  select2 = output<string>(); // → You can use outputs to emit values to parent directives and component.
+  // select2 = output<string>(); // → You can use outputs to emit values to parent directives and component.
 
   //
   // 🟦🟦 Accepting Objects As Inputs & Adding Appropriate Typings
@@ -113,10 +114,14 @@ export class UserComponent {
   //
   // 🟦🟦 TypeScript: Type Aliases & Interfaces
   @Input({ required: true }) user!: User;
+  @Input({ required: true }) selected!: boolean;
+  @Output() select = new EventEmitter<string>();
 
   get imagePath4() {
     return 'users/' + this.user.avatar;
   }
 
-  @Input({ required: true }) selected!: boolean;
+  onEmitTheIdOfTheSelectedUser() {
+    this.select.emit(this.user.id);
+  }
 }
