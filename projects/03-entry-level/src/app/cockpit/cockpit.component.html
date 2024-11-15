@@ -1,13 +1,13 @@
 <div class="box">
   <label>Server Name</label>
   <input type="text" [(ngModel)]="newName" />
-  <!-- <input type="text" #newName2 /> -->
+  <input type="text" #newName2 />
 
   <label>Server Content</label>
   <input type="text" [(ngModel)]="newContent" />
 
   <button class="btn" (click)="onAddServer()">Add Server</button>
-  <!-- <button class="btn" (click)="onAddServer2(newName2)">Add Server 2</button> -->
+  <button class="btn" (click)="onAddServer2(newName2)">Add Server 2</button>
   <button class="btn" (click)="onAddBlueprint()">Add Server Blueprint</button>
 </div>
 
