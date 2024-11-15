@@ -31,6 +31,11 @@ export class CockpitComponent {
       content: this.newContent,
     });
   }
+
+  // 🟦 Declaring a Template Reference Variable
+  onAddServer2(test: HTMLInputElement) {
+    console.log(test.value);
+  }
 }
 /*
   🟦
