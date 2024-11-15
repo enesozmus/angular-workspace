@@ -11,22 +11,19 @@ export class AppComponent {
     { type: 'blueprint', name: 'Blueprints', content: 'first blueprint' },
   ];
 
-  newServerName = '';
-  newServerContent = '';
-
-  onAddServer() {
+  onServerAdded(server: { name: string; content: string }) {
     this.serverElements.push({
       type: 'server',
-      name: this.newServerName,
-      content: this.newServerContent,
+      name: server.name,
+      content: server.content,
     });
   }
 
-  onAddBlueprint() {
+  onBlueprintAdded(blueprint: { name: string; content: string }) {
     this.serverElements.push({
       type: 'blueprint',
-      name: this.newServerName,
-      content: this.newServerContent,
+      name: blueprint.name,
+      content: blueprint.content,
     });
   }
 }

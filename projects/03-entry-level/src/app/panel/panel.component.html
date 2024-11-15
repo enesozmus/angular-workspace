@@ -1,0 +1,16 @@
+<div class="box">
+  <div class="panel panel-warning">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{ element.name }}</h3>
+    </div>
+
+    <div class="panel-body">
+      <strong *ngIf="element.type === 'server'" style="color: red">
+        {{ element.content }}
+      </strong>
+      <em *ngIf="element.type === 'blueprint'" style="color: blue">
+        {{ element.content }}
+      </em>
+    </div>
+  </div>
+</div>

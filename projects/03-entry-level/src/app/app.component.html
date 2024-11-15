@@ -1,31 +1,10 @@
 <div class="container">
   <h1 class="title">Servers and Blueprints</h1>
 
-  <div class="box">
-    <label>Server Name</label>
-    <input type="text" [(ngModel)]="newServerName" />
+  <app-cockpit
+    (serverCreated)="onServerAdded($event)"
+    (blueprintCreated)="onBlueprintAdded($event)"
+  />
 
-    <label>Server Content</label>
-    <input type="text" [(ngModel)]="newServerContent" />
-
-    <button class="btn" (click)="onAddServer()">Add Server</button>
-    <button class="btn" (click)="onAddBlueprint()">Add Server Blueprint</button>
-  </div>
-
-  <div class="box">
-    <div class="panel panel-warning" *ngFor="let element of serverElements">
-      <div class="panel-heading">
-        <h3 class="panel-title">{{ element.name }}</h3>
-      </div>
-
-      <div class="panel-body">
-        <strong *ngIf="element.type === 'server'" style="color: red">
-          {{ element.content }}
-        </strong>
-        <em *ngIf="element.type === 'blueprint'" style="color: blue">
-          {{ element.content }}
-        </em>
-      </div>
-    </div>
-  </div>
+  <app-panel *ngFor="let element of serverElements" [element]="element" />
 </div>
