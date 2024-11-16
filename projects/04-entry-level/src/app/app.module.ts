@@ -9,6 +9,7 @@ import { BasicHighlightDirective } from './basic-highlight/basic-highlight.direc
 import { BetterHighlightDirective } from './better-highlight/better-highlight.directive';
 import { InteractiveHighlightDirective } from './interactive-highlight/interactive-highlight.directive';
 import { BindableHighlightDirective } from './bindable-highlight/bindable-highlight.directive';
+import { UnlessDirective } from './unless/unless.directive';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { BindableHighlightDirective } from './bindable-highlight/bindable-highli
     BasicHighlightDirective,
     BetterHighlightDirective,
     InteractiveHighlightDirective,
-    BindableHighlightDirective
+    BindableHighlightDirective,
+    UnlessDirective,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
