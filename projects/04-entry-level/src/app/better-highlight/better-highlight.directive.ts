@@ -4,6 +4,8 @@ import { Directive, ElementRef, OnInit, Renderer2 } from '@angular/core';
   selector: '[appBetterHighlight]',
 })
 export class BetterHighlightDirective implements OnInit {
+
+  // 🟥
   constructor(private elRef: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit() {
@@ -26,8 +28,8 @@ export class BetterHighlightDirective implements OnInit {
 }
 
 /*
-🟦
-🟦🟦 Renderer2
+  🟦
+  🟦🟦 Renderer2
 
-  → Renderer2 class'ı, Angular tarafından DOM'a doğrudan dokunmadan uygulamanızın elementlerini düzenlemenize izin veren bir hizmet biçiminde sağlanan bir soyutlamadır.
+    → Renderer2 class'ı, Angular tarafından DOM'a doğrudan dokunmadan uygulamanızın elementlerini düzenlemenize izin veren bir hizmet biçiminde sağlanan bir soyutlamadır.
 */
