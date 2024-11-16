@@ -23,13 +23,16 @@
   <p appBasicHighlight>
     Style me with a basic attribute directive
   </p>
+
   <p appBetterHighlight>
     Style me with a better attribute directive
   </p>
+
   <p appInteractiveHighlight>
     Style me with an interactive attribute directive
   </p>
-  <p 
+
+  <p
     appBindableHighlight
     [defaultColor]="'transparent'"
     [highlightColor]="'orange'"
@@ -39,6 +42,14 @@
 
   <div *appUnless="!onlyOdd">
     <p>Building a Structural Directive</p>
+  </div>
+
+  <div [ngSwitch]="value">
+    <p *ngSwitchCase="5">Value is 5</p>
+    <p *ngSwitchCase="10">Value is 10</p>
+    <p *ngSwitchCase="15">Value is 15</p>
+    <p *ngSwitchCase="100">Value is 100</p>
+    <p *ngSwitchDefault>Value is Default</p>
   </div>
 
   <!-- <ng-template [ngIf]="onlyOdd">
