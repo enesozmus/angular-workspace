@@ -25,3 +25,15 @@
 .btn:is(:hover, :focus-visible) {
   background-color: #0b45d7;
 }
+
+.list { 
+  margin-top: 2rem;
+}
+
+.list-item {
+  border: 1px solid #000;
+}
+
+.odd {
+  color: red;
+}
