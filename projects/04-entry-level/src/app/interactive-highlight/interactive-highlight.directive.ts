@@ -3,7 +3,6 @@ import {
   ElementRef,
   HostBinding,
   HostListener,
-  OnInit,
   Renderer2,
 } from '@angular/core';
 
