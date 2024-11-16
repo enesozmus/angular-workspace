@@ -1,4 +1,10 @@
-import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Output,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'app-cockpit',
@@ -39,7 +45,6 @@ export class CockpitComponent {
     console.log(this.newName2);
     console.log(this.newName2.nativeElement);
     console.log(this.newName2.nativeElement.value);
-
   }
 
   // 🟦 Getting Access to the Template & DOM with @ViewChild
@@ -64,5 +69,6 @@ export class CockpitComponent {
 
   🟦
   🟦🟦 ElementRef
+
     → A wrapper around a native element inside of a View.
 */
