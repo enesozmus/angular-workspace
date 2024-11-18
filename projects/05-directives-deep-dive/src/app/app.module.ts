@@ -9,6 +9,7 @@ import { LearningResourcesComponent } from './learning-resources/learning-resour
 
 import { SafeLinkDirective } from './directives/safe-link.directive';
 import { AuthDirective } from './directives/auth.directive';
+import { LogDirective } from './directives/log.directive';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AuthDirective } from './directives/auth.directive';
     LearningResourcesComponent,
     SafeLinkDirective,
     AuthDirective,
+    LogDirective,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
