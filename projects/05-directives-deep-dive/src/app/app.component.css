@@ -13,10 +13,6 @@ main {
   border-radius: 4px;
 }
 
-#protected-content p {
-  margin: 0;
-}
-
 .authenticated {
   background-color: #3a096a;
 }

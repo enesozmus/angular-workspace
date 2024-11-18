@@ -94,6 +94,7 @@ h6 {
 p {
   text-wrap: pretty;
   color: #2e323b;
+  margin-top: 1rem;
 }
 h1,
 h2,
