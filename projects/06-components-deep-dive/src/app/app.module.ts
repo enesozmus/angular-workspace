@@ -9,6 +9,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TrafficComponent } from './dashboard/traffic/traffic.component';
 import { TicketsComponent } from './dashboard/tickets/tickets.component';
 import { ServerStatusComponent } from './dashboard/server-status/server-status.component';
+import { DashboardItemComponent } from './dashboard/dashboard-item/dashboard-item.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ServerStatusComponent } from './dashboard/server-status/server-status.c
     TrafficComponent,
     TicketsComponent,
     ServerStatusComponent,
+    DashboardItemComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
