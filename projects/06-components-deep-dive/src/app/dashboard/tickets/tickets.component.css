@@ -1,0 +1,8 @@
+#tickets {
+  display: flex;
+  gap: 1.5rem;
+}
+
+#tickets li {
+  margin: 0.5rem 0;
+}

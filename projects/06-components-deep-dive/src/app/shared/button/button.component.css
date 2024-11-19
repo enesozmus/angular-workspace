@@ -1,0 +1,22 @@
+button {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 0.65rem 1.35rem;
+  background-color: #691ebe;
+  border-radius: 0.25rem;
+}
+
+button:is(:hover, :focus-visible) {
+  background-color: #551b98;
+}
+
+.icon {
+  display: inline-block;
+  margin-left: 0.5rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+button:is(:hover, :focus-visible) .icon {
+  transform: translateX(4px);
+}
