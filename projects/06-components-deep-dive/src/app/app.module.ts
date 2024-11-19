@@ -13,6 +13,7 @@ import { DashboardItemComponent } from './dashboard/dashboard-item/dashboard-ite
 import { TicketComponent } from './dashboard/tickets/ticket/ticket.component';
 import { NewTicketComponent } from './dashboard/tickets/new-ticket/new-ticket.component';
 import { ButtonComponent } from './shared/button/button.component';
+import { ControlComponent } from './shared/control/control.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ButtonComponent } from './shared/button/button.component';
     TicketComponent,
     NewTicketComponent,
     ButtonComponent,
+    ControlComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
