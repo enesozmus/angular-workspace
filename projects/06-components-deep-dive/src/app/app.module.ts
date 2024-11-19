@@ -12,6 +12,7 @@ import { ServerStatusComponent } from './dashboard/server-status/server-status.c
 import { DashboardItemComponent } from './dashboard/dashboard-item/dashboard-item.component';
 import { TicketComponent } from './dashboard/tickets/ticket/ticket.component';
 import { NewTicketComponent } from './dashboard/tickets/new-ticket/new-ticket.component';
+import { ButtonComponent } from './shared/button/button.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { NewTicketComponent } from './dashboard/tickets/new-ticket/new-ticket.co
     DashboardItemComponent,
     TicketComponent,
     NewTicketComponent,
+    ButtonComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
