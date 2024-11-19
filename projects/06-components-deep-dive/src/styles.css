@@ -114,6 +114,12 @@ hr {
 
 /* *********************************** */
 /* *********************************** */
+h2 {
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  color: #504e50;
+}
+
 header {
   display: flex;
   flex-direction: column;
@@ -182,15 +188,9 @@ main {
 }
 
 .dashboard-item header img {
-  width: 4.5rem;
-  height: 4.5rem;
+  width: 4.7rem;
+  height: 4.7rem;
   object-fit: contain;
-}
-
-h1 {
-  font-size: 2.2rem;
-  text-transform: uppercase;
-  color: #504e50;
 }
 
 #chart {
@@ -266,6 +266,33 @@ button:is(:hover, :focus-visible) {
 
 button:is(:hover, :focus-visible) .icon {
   transform: translateX(4px);
+}
+
+/* *********************************** */
+/* *********************************** */
+#tickets {
+  display: flex;
+  gap: 1.5rem;
+}
+
+#tickets li {
+  margin: 0.5rem 0;
+}
+
+#new-ticket label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.15rem;
+  color: #4f4b53;
+}
+
+#new-ticket input,
+#new-ticket textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #4f4b53;
 }
 
 @media only screen and (max-width: 980px) {

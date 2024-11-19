@@ -10,6 +10,8 @@ import { TrafficComponent } from './dashboard/traffic/traffic.component';
 import { TicketsComponent } from './dashboard/tickets/tickets.component';
 import { ServerStatusComponent } from './dashboard/server-status/server-status.component';
 import { DashboardItemComponent } from './dashboard/dashboard-item/dashboard-item.component';
+import { TicketComponent } from './dashboard/tickets/ticket/ticket.component';
+import { NewTicketComponent } from './dashboard/tickets/new-ticket/new-ticket.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { DashboardItemComponent } from './dashboard/dashboard-item/dashboard-ite
     TicketsComponent,
     ServerStatusComponent,
     DashboardItemComponent,
+    TicketComponent,
+    NewTicketComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
