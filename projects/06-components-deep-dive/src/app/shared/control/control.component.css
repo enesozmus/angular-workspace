@@ -13,3 +13,8 @@
   border-radius: 4px;
   color: #4f4b53;
 }
+
+/* Interacting with Host Elements via HostListener & HostBinding */
+.london {
+  font-size: 9rem;
+}
