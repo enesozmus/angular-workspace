@@ -1,4 +1,4 @@
-button {
+:host {
   display: inline-block;
   color: white;
   text-align: center;
@@ -7,7 +7,7 @@ button {
   border-radius: 0.25rem;
 }
 
-button:is(:hover, :focus-visible) {
+:host:is(:hover, :focus-visible) {
   background-color: #551b98;
 }
 
@@ -17,6 +17,6 @@ button:is(:hover, :focus-visible) {
   transition: transform 0.2s ease-in-out;
 }
 
-button:is(:hover, :focus-visible) .icon {
+:host:is(:hover, :focus-visible) .icon {
   transform: translateX(4px);
 }
