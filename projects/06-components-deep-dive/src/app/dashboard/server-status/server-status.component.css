@@ -2,19 +2,25 @@
   font-weight: bold;
   animation: pulse 2s infinite;
   margin: 0 0 0.5rem 0;
-  font-size: 1.15rem;
+  font-size: 2.3rem;
 }
 
 .status-online p:first-of-type {
-  color: #6a3cb0;
+  color: palegoldenrod;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .status-offline p:first-of-type {
-  color: #b22084;
+  color: pink;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .status-unknown p:first-of-type {
   color: grey;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 p:last-of-type {
