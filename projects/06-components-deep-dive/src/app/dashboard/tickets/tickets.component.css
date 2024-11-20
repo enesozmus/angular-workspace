@@ -1,8 +1,12 @@
-#tickets {
+:host {
   display: flex;
   gap: 1.5rem;
 }
 
-#tickets li {
+:host li {
   margin: 0.5rem 0;
+}
+
+:host h2 {
+  color: #38343c;
 }
