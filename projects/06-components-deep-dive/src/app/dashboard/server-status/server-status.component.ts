@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  inject,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 
 @Component({
   selector: 'app-server-status',
@@ -11,6 +17,9 @@ export class ServerStatusComponent implements OnInit, OnDestroy {
 
   // private interval: NodeJS.Timeout | undefined;
   private interval?: ReturnType<typeof setInterval>;
+
+  // 🟡 DestroyRef | Angular v16 or newer
+  // private destroyRef = inject(DestroyRef);
 
   /**
    * 🟥
@@ -36,6 +45,11 @@ export class ServerStatusComponent implements OnInit, OnDestroy {
         this.currentStatus = 'unknown';
       }
     }, 5000);
+
+    // this.destroyRef.onDestroy(() => {
+    //   ↑ not this.interval, → const interval
+    //   clearInterval(interval);
+    // });
   }
 
   /**
@@ -43,7 +57,9 @@ export class ServerStatusComponent implements OnInit, OnDestroy {
    */
   ngOnDestroy(): void {
     console.log('⬛ ON Destroy');
-    console.log('Now, In our application the relevant component is always there.');
+    console.log(
+      'Now, In our application the relevant component is always there.'
+    );
     clearTimeout(this.interval);
   }
 }
