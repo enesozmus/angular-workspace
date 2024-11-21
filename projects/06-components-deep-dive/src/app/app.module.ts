@@ -14,6 +14,7 @@ import { TicketComponent } from './dashboard/tickets/ticket/ticket.component';
 import { NewTicketComponent } from './dashboard/tickets/new-ticket/new-ticket.component';
 import { ButtonComponent } from './shared/button/button.component';
 import { ControlComponent } from './shared/control/control.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { ControlComponent } from './shared/control/control.component';
     ButtonComponent,
     ControlComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
