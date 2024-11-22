@@ -1,12 +1,12 @@
 <!-- <form (ngSubmit)="onSubmit(titleInput)"> -->
 <form (ngSubmit)="onSubmit2(titleInput.value, textInput.value, ourForm)" #ourForm>
-  <app-control label="Title">
-    <input name="title" id="title" #titleInput />
+  <app-control label="Title" #vhagar>
+    <input name="title" id="title" #titleInput #vhagar/>
   </app-control>
   <!--🟡Template Variables & Component Instances🟡-->
   <!-- <app-control label="Request" #ctrl> -->
   <app-control label="Request" #ctrl>
-    <textarea name="request" id="request" rows="3" #textInput></textarea>
+    <textarea name="request" id="request" rows="3" #textInput #vhagar></textarea>
   </app-control>
   <p>
     <!--🟡Template Variables & Component Instances🟡-->

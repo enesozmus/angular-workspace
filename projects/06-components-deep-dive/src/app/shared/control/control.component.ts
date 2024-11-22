@@ -1,5 +1,7 @@
 import {
   Component,
+  contentChild,
+  ContentChild,
   ElementRef,
   HostBinding,
   HostListener,
@@ -14,7 +16,7 @@ import {
   styleUrl: './control.component.css',
   host: {
     class: 'control',
-    // '(click)': 'onClick2()',
+    '(click)': 'onClick3()',
   },
   encapsulation: ViewEncapsulation.None,
 })
@@ -37,4 +39,14 @@ export class ControlComponent {
   //   console.log('Clicked!');
   //   console.log(this.el);
   // }
+
+  // 🟡 ContentChild
+  @ContentChild('vhagar') private control?: ElementRef<HTMLInputElement | HTMLTextAreaElement>;
+
+  // private control2 = contentChild<ElementRef<HTMLInputElement | HTMLTextAreaElement>>('vhagar');
+
+  onClick3() {
+    console.log('❤ Clicked! ControlComponent Host Element');
+    console.log(this.control);
+  }
 }
