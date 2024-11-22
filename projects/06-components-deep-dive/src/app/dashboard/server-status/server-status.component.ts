@@ -1,9 +1,11 @@
 import {
   Component,
   DestroyRef,
+  effect,
   inject,
   OnDestroy,
   OnInit,
+  signal,
 } from '@angular/core';
 
 @Component({
@@ -14,6 +16,7 @@ import {
 export class ServerStatusComponent implements OnInit, OnDestroy {
   // 🟡 Literal Types
   currentStatus: 'online' | 'offline' | 'unknown' = 'offline';
+  currentStatus2 = signal<'online' | 'offline' | 'unknown'>('offline');
 
   // private interval: NodeJS.Timeout | undefined;
   private interval?: ReturnType<typeof setInterval>;
@@ -26,6 +29,18 @@ export class ServerStatusComponent implements OnInit, OnDestroy {
    */
   constructor() {
     console.log('🟥 ON constructor');
+    console.log('......' + this.currentStatus2());
+    /**
+     * Registers an "effect" that will be scheduled & executed whenever the signals that it reads changes.
+     * Signals are useful because they notify interested consumers when they change.
+     * An effect is an operation that runs whenever one or more signal values change.
+     * ! When working with Signal effects, you sometimes might need to perform some cleanup work before the effect function runs again
+     * You can create an effect with the effect function:
+     */
+    effect(() => {
+      console.log(this.currentStatus2());
+      console.log(`The current count is: ${this.currentStatus2()}`);
+    });
   }
 
   /**
@@ -39,10 +54,13 @@ export class ServerStatusComponent implements OnInit, OnDestroy {
 
       if (rnd < 0.5) {
         this.currentStatus = 'online';
+        this.currentStatus2.set('online');
       } else if (rnd < 0.9) {
         this.currentStatus = 'offline';
+        this.currentStatus2.set('offline');
       } else {
         this.currentStatus = 'unknown';
+        this.currentStatus2.set('unknown');
       }
     }, 5000);
 
