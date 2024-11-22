@@ -1,5 +1,7 @@
 import {
   AfterContentInit,
+  afterNextRender,
+  afterRender,
   Component,
   contentChild,
   ContentChild,
@@ -23,6 +25,19 @@ import {
 })
 export class ControlComponent implements AfterContentInit {
   @Input({ required: true }) label!: string;
+
+  /**
+   * 🟥
+   */
+  constructor() {
+    // afterRender(() => {
+    //   console.log('afterRender');
+    // });
+
+    // afterNextRender(() => {
+    //   console.log('afterNextRender');
+    // });
+  }
 
   // label = input.required<string>();
   // label()
