@@ -1,4 +1,5 @@
 import {
+  AfterContentInit,
   Component,
   contentChild,
   ContentChild,
@@ -20,7 +21,7 @@ import {
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ControlComponent {
+export class ControlComponent implements AfterContentInit {
   @Input({ required: true }) label!: string;
 
   // label = input.required<string>();
@@ -49,4 +50,19 @@ export class ControlComponent {
     console.log('❤ Clicked! ControlComponent Host Element');
     console.log(this.control);
   }
+
+  /**
+   * İlgili Component'in içeriği (ng-content) initialize edildikten sonra bir kez çalışır.
+   */
+  ngAfterContentInit(): void {
+    console.log('Control → AFTER CONTENT INIT');
+    console.log('🟫');
+    console.log(this.control?.nativeElement);
+    console.log('🟫');
+  }
 }
+
+/**
+ *  In Angular, @ContentChild and @ViewChild have specific roles that align with particular lifecycle hooks, 
+ * and while you can theoretically use either with either hook, you will normally use @Content Child with ngAfterContentInIt and @View Child with ngAfterViewInIt.
+ */

@@ -1,6 +1,8 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
+  OnInit,
   viewChild,
   ViewChild,
   ViewChildren,
@@ -11,8 +13,30 @@ import {
   templateUrl: './new-ticket.component.html',
   styleUrl: './new-ticket.component.css',
 })
-export class NewTicketComponent {
+export class NewTicketComponent implements OnInit, AfterViewInit {
   
+  /**
+   * İlgili component'in tüm @Input'ları initialize edildikten sonra bir kez çalışır.
+   * Bu adım, şablon başlatılmadan önce gerçekleşir.
+   */
+  ngOnInit(): void {
+    console.log('AFTER ngOnInit');
+    console.log('⚫');
+    console.log(this.formElement?.nativeElement); // → undefined
+    console.log('⚫');
+  }
+
+  /**
+   * İlgili component'in view'ı initialize edildikten sonra bir kez çalışır.
+   * Şablon tarafındaki ögeler ulaşılabilir/tanımlı hale gelir.
+   */
+  ngAfterViewInit(): void {
+    console.log('AFTER VIEW INIT');
+    console.log('🟧');
+    console.log(this.formElement?.nativeElement);
+    console.log('🟧');
+  }
+
   // 🟡 Handling Form Submission
   // onSubmit(titleInputElement: HTMLInputElement) {
   //   console.log('Hi form');
