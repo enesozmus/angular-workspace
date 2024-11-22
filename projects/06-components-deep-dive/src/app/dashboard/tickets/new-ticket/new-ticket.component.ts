@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-new-ticket',
@@ -6,7 +6,6 @@ import { Component } from '@angular/core';
   styleUrl: './new-ticket.component.css',
 })
 export class NewTicketComponent {
-
   // 🟡 Handling Form Submission
   // onSubmit(titleInputElement: HTMLInputElement) {
   //   console.log('Hi form');
@@ -17,10 +16,17 @@ export class NewTicketComponent {
   //   const enteredTitle = titleInputElement.value;
   //   console.log(enteredTitle);
   // }
-  
-  onSubmit2(title: string, ticketText: string) {
+
+  // 🟡 Getting Access to Template Elements via ViewChild
+  @ViewChild('ourForm', { static: false }) formElement?: ElementRef<HTMLFormElement>;
+
+  onSubmit2(title: string, ticketText: string, formElement: HTMLFormElement) {
     console.log('🟧🟧🟧onSubmit2');
     console.log(title);
     console.log(ticketText);
+    console.log(formElement);
+
+    formElement.reset();
+    this.formElement?.nativeElement.reset();
   }
 }
