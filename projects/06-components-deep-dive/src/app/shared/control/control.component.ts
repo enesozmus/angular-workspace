@@ -23,7 +23,8 @@ import {
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ControlComponent implements AfterContentInit {
+// export class ControlComponent implements AfterContentInit {
+export class ControlComponent {
   @Input({ required: true }) label!: string;
 
   /**
@@ -33,7 +34,6 @@ export class ControlComponent implements AfterContentInit {
     // afterRender(() => {
     //   console.log('afterRender');
     // });
-
     // afterNextRender(() => {
     //   console.log('afterNextRender');
     // });
@@ -57,24 +57,32 @@ export class ControlComponent implements AfterContentInit {
   // }
 
   // 🟡 ContentChild
-  @ContentChild('vhagar') private control?: ElementRef<HTMLInputElement | HTMLTextAreaElement>;
-
-  // private control2 = contentChild<ElementRef<HTMLInputElement | HTMLTextAreaElement>>('vhagar');
+  @ContentChild('stark') private controlContent?: ElementRef<HTMLInputElement>;
+  @ContentChild('vermithor') private controlContent2?: ElementRef<
+    HTMLInputElement | HTMLTextAreaElement
+  >;
+  // private control2 = contentChild<ElementRef<HTMLInputElement | HTMLTextAreaElement>>('vermithor');
 
   onClick3() {
-    console.log('❤ Clicked! ControlComponent Host Element');
-    console.log(this.control);
+    console.log('');
+    // console.log('❤ Clicked! ControlComponent Host Element');
+    // console.log(this.controlContent);
+    // console.log('🟥');
+    // console.log(this.controlContent2);
+    // console.log('🟥');
   }
 
   /**
    * İlgili Component'in içeriği (ng-content) initialize edildikten sonra bir kez çalışır.
    */
-  ngAfterContentInit(): void {
-    console.log('Control → AFTER CONTENT INIT');
-    console.log('🟫');
-    console.log(this.control?.nativeElement);
-    console.log('🟫');
-  }
+  // ngAfterContentInit(): void {
+  //   console.log('Control → AFTER CONTENT INIT');
+  //   console.log('🟫🟫🟫');
+  //   console.log(this.controlContent?.nativeElement);
+  //   console.log('🟥');
+  //   console.log(this.controlContent2?.nativeElement);
+  //   console.log('🟫🟫🟫');
+  // }
 }
 
 /**
