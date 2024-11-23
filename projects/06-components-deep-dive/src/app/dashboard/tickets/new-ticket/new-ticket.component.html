@@ -1,8 +1,14 @@
 <!-- <form (ngSubmit)="onSubmit(titleInput)"> -->
 <!-- <form (ngSubmit)="onSubmit2(titleInput.value, textInput.value, ourForm)" #ourForm> -->
-<form (ngSubmit)="onSubmit2(titleInput.value, textInput.value, ourForm)" #ourForm>
+<form (ngSubmit)="onSubmit()">
   <app-control label="Title">
-    <input name="title" id="title" #titleInput #vermithor />
+    <input
+      name="title"
+      id="title"
+      #titleInput
+      #vermithor
+      [(ngModel)]="enteredTitle"
+    />
     <!-- <input name="stark2" id="stark2" #stark/> -->
   </app-control>
   <!--🟡Template Variables & Component Instances🟡-->
@@ -14,6 +20,7 @@
       rows="3"
       #textInput
       #vermithor
+      [(ngModel)]="enteredText"
     ></textarea>
   </app-control>
   <p>
