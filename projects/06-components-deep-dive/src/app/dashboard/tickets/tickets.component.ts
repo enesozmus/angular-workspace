@@ -20,4 +20,14 @@ export class TicketsComponent {
     // 🟦 push
     this.tickets.push(ticket);
   }
+
+  // 🟦 Change Ticket Status
+  onCloseTicket(id: string) {
+    this.tickets = this.tickets.map((ticket) => {
+      if (ticket.id === id) {
+        return { ...ticket, status: 'closed' };
+      }
+      return ticket;
+    });
+  }
 }
