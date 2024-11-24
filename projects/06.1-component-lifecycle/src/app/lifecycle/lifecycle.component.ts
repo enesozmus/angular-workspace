@@ -44,17 +44,27 @@ export class LifecycleComponent
   // 1
   constructor() {
     console.log('1️⃣ 🟥🟥🟥constructor called! 🟥');
+    console.log(this.text); // → undefined
   }
 
   // 2
-  ngOnInit() {
-    console.log('1️⃣ 🟦🟦🟦ngOnInit called! 🟦');
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('🟣⚫⚫ngOnChanges called!');
+    for (const inputName in changes) {
+      const inputValues = changes[inputName];
+      console.log(`Previous ${inputName} == ${inputValues.previousValue}`);
+      console.log(`Current ${inputName} == ${inputValues.currentValue}`);
+      console.log(`Is first ${inputName} change == ${inputValues.firstChange}`);
+    }
+    console.log('');
+    console.log(this.text); 
+    console.log(changes);
   }
 
   // 3
-  ngOnChanges(changes: SimpleChanges) {
-    console.log('🟣⚫⚫ngOnChanges called!');
-    console.log(changes);
+  ngOnInit() {
+    console.log('1️⃣ 🟦🟦🟦ngOnInit called! 🟦');
+    console.log(this.text);
   }
 
   // 4
