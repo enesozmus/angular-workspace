@@ -13,7 +13,7 @@
     <p>Chicago: {{ currentTemperatures.chicago | number:'1.1-2' }}</p>
     <!-- <p>London: {{ currentTemperatures.chicago | temperaturePipe }}</p> -->
     <p>London: {{ currentTemperatures.chicago | temperaturePipe:'fah':'cel' }}</p>
-    <p>London: {{ currentTemperatures.chicago | temperaturePipe:'cel':'fah' }}</p>
+    <p>London: {{ currentTemperatures.chicago | number:'1.1-2' | temperaturePipe:'cel':'fah' }}</p>
   </article>
 
   <article class="temperatures">
@@ -26,7 +26,7 @@
     </header>
     <ul>
       @for (temperature of historicTemperatures; track temperature) {
-        <li (click)="onReset($index)">{{ temperature }}</li>
+         <li (click)="onReset($index)">{{ temperature | temperaturePipe:'cel' }}</li>
       }
     </ul>
   </article>
