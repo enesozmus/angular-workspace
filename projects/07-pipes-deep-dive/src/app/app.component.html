@@ -11,7 +11,9 @@
     <p>Berlin: {{ currentTemperatures.berlin | number:'1.1-2' }}</p>
     <p>Paris: {{ currentTemperatures.paris | number:'1.1-2' }}</p>
     <p>Chicago: {{ currentTemperatures.chicago | number:'1.1-2' }}</p>
-    <p>London: {{ currentTemperatures.chicago | temperaturePipe }}</p>
+    <!-- <p>London: {{ currentTemperatures.chicago | temperaturePipe }}</p> -->
+    <p>London: {{ currentTemperatures.chicago | temperaturePipe:'fah':'cel' }}</p>
+    <p>London: {{ currentTemperatures.chicago | temperaturePipe:'cel':'fah' }}</p>
   </article>
 
   <article class="temperatures">
