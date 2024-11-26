@@ -19,6 +19,10 @@ export class AppComponent {
     25, 37, 19, -4, 28, 21, 19, 28, 33, 31, 9, 11, 5, -12, -5,
   ];
 
+  constructor() {
+    this.historicTemperatures.sort((a, b) => (a > b ? 1 : -1));
+  }
+
   onReset(index: number) {
     this.historicTemperatures[index] = 18;
     // 🟥 or pure: false
@@ -26,4 +30,14 @@ export class AppComponent {
     // newTemps[index] = 18;
     // this.historicTemperatures = newTemps;
   }
+
+  /**
+   * 🔺
+   * 🔺🔺
+   * 🔺🔺🔺
+   * Whenever you enter the area of changing behaviors and adding functionality, you want to think twice before using 'a pipe'.
+   * 🔺🔺🔺
+   * 🔺🔺
+   * 🔺
+   */
 }

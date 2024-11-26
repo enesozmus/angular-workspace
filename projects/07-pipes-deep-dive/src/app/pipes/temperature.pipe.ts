@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'temperaturePipe',
   // standalone: true,
-  pure: false,
+  // pure: false,
 })
 export class TemperaturePipe implements PipeTransform {
 
