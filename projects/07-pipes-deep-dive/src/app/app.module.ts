@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TemperaturePipe } from './pipes/temperature.pipe';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, TemperaturePipe],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
