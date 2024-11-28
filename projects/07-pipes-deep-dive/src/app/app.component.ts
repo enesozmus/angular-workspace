@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   currentDate = new Date();
+  longText =
+    'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi, distinctio.';
 
   currentTemperatures = {
     berlin: 4.2749812,
