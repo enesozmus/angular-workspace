@@ -1,4 +1,4 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, Input, input } from '@angular/core';
 import { Task, TaskStatus } from '../../task.model';
 // import { TasksService } from '../../../services/tasks.service';
 import { TasksServiceToken } from '../../../app.module';
@@ -11,20 +11,35 @@ import { TasksServiceToken } from '../../../app.module';
 export class TaskItemComponent {
    // private tasksService = inject(TasksService);
    private tasksService = inject(TasksServiceToken);
-   task = input.required<Task>();
+   
+   // task = input.required<Task>();
+   @Input({ required: true }) task!: Task;
 
-   taskStatus = computed(() => {
-      switch (this.task().status) {
-         case 'OPEN':
-            return 'Open';
-         case 'IN_PROGRESS':
-            return 'Working on it';
-         case 'DONE':
-            return 'Completed';
-         default:
-            return 'Open';
+   // taskStatus = computed(() => {
+   //    switch (this.task().status) {
+   //       case 'OPEN':
+   //          return 'Open';
+   //       case 'IN_PROGRESS':
+   //          return 'Working on it';
+   //       case 'DONE':
+   //          return 'Completed';
+   //       default:
+   //          return 'Open';
+   //    }
+   // });
+
+   get taskStatus() {
+      switch (this.task.status) {
+        case 'OPEN':
+          return 'Open';
+        case 'IN_PROGRESS':
+          return 'Working on it';
+        case 'DONE':
+          return 'Completed';
+        default:
+          return 'Open';
       }
-   });
+    }
 
    onChangeTaskStatus(taskId: string, status: string) {
       let newStatus: TaskStatus = 'OPEN';

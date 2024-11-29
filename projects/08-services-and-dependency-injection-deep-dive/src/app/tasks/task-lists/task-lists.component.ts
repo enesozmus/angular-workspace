@@ -12,28 +12,51 @@ export class TasksListComponent {
    private tasksService = inject(TasksServiceToken);
    // tasks = [];
    // 🟡 read-only
-   // tasks = this.tasksService.allTasks;          // Signal<Task[]>
-   selectedFilter = signal<string>('all');
-   tasks = computed(() => {
-      switch (this.selectedFilter()) {
+   // tasks = this.tasksService.allTasks;
+
+   // selectedFilter = signal<string>('all');
+   private selectedFilter = 'all';
+
+   // tasks = computed(() => {
+   //    switch (this.selectedFilter()) {
+   //       case 'open':
+   //          return this.tasksService
+   //             .allTasks()
+   //             .filter(task => task.status === 'OPEN');
+   //       case 'in-progress':
+   //          return this.tasksService
+   //             .allTasks()
+   //             .filter(task => task.status === 'IN_PROGRESS');
+   //       case 'done':
+   //          return this.tasksService
+   //             .allTasks()
+   //             .filter(task => task.status === 'DONE');
+   //       default:
+   //          return this.tasksService.allTasks();
+   //    }
+   // });
+
+   get tasks() {
+      switch (this.selectedFilter) {
          case 'open':
-            return this.tasksService
-               .allTasks()
-               .filter(task => task.status === 'OPEN');
+            return this.tasksService.allTasks.filter(
+               task => task.status === 'OPEN'
+            );
          case 'in-progress':
-            return this.tasksService
-               .allTasks()
-               .filter(task => task.status === 'IN_PROGRESS');
+            return this.tasksService.allTasks.filter(
+               task => task.status === 'IN_PROGRESS'
+            );
          case 'done':
-            return this.tasksService
-               .allTasks()
-               .filter(task => task.status === 'DONE');
+            return this.tasksService.allTasks.filter(
+               task => task.status === 'DONE'
+            );
          default:
-            return this.tasksService.allTasks();
+            return this.tasksService.allTasks;
       }
-   });
+   }
 
    onChangeTasksFilter(filter: string) {
-      this.selectedFilter.set(filter);
+      // this.selectedFilter.set(filter);
+      this.selectedFilter = filter;
    }
 }
