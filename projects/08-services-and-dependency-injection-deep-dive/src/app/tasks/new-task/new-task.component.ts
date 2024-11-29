@@ -1,4 +1,5 @@
-import { Component, ElementRef, viewChild } from '@angular/core';
+import { Component, ElementRef, Inject, viewChild } from '@angular/core';
+import { TasksServiceToken } from '../../app.module';
 import { TasksService } from '../../services/tasks.service';
 
 @Component({
@@ -12,7 +13,8 @@ export class NewTaskComponent {
    /**
     * 🟥
     */
-   constructor(private tasksService: TasksService) {}
+   // constructor(private tasksService: TasksService) {}
+   constructor(@Inject(TasksServiceToken) private tasksService: TasksService) {}
 
    // 🟦
    // 🟦🟦

@@ -1,5 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { TasksService } from '../../services/tasks.service';
+// import { TasksService } from '../../services/tasks.service';
+import { TasksServiceToken } from '../../app.module';
 
 @Component({
    selector: 'app-tasks-list',
@@ -7,7 +8,8 @@ import { TasksService } from '../../services/tasks.service';
    styleUrl: './task-lists.component.css',
 })
 export class TasksListComponent {
-   private tasksService = inject(TasksService);
+   // private tasksService = inject(TasksService);
+   private tasksService = inject(TasksServiceToken);
    // tasks = [];
    // 🟡 read-only
    // tasks = this.tasksService.allTasks;          // Signal<Task[]>

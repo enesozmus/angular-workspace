@@ -1,6 +1,7 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { Task, TaskStatus } from '../../task.model';
-import { TasksService } from '../../../services/tasks.service';
+// import { TasksService } from '../../../services/tasks.service';
+import { TasksServiceToken } from '../../../app.module';
 
 @Component({
    selector: 'app-task-item',
@@ -8,7 +9,8 @@ import { TasksService } from '../../../services/tasks.service';
    styleUrl: './task-item.component.css',
 })
 export class TaskItemComponent {
-   private tasksService = inject(TasksService);
+   // private tasksService = inject(TasksService);
+   private tasksService = inject(TasksServiceToken);
    task = input.required<Task>();
 
    taskStatus = computed(() => {
