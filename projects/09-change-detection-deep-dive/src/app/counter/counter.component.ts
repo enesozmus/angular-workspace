@@ -8,8 +8,9 @@ import { Component, signal } from '@angular/core';
 export class CounterComponent {
    count = signal(0);
 
+   // 🟡 Understanding the Importance of Writing Efficient Template Bindings
    get debugOutput() {
-      console.log('[Counter] "debugOutput" binding re-evaluated.');
+      console.log('🟡 [Counter] "debugOutput" binding re-evaluated.');
       return 'Counter Component Debug Output';
    }
 

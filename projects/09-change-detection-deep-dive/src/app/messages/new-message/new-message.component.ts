@@ -9,8 +9,9 @@ export class NewMessageComponent {
    add = output<string>();
    enteredText = signal('');
 
+   // 🟡 Understanding the Importance of Writing Efficient Template Binding
    get debugOutput() {
-      console.log('[NewMessage] "debugOutput" binding re-evaluated.');
+      console.log('🟡 [NewMessage] "debugOutput" binding re-evaluated.');
       return 'NewMessage Component Debug Output';
    }
 

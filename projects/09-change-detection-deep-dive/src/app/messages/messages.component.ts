@@ -8,8 +8,9 @@ import { Component, signal } from '@angular/core';
 export class MessagesComponent {
    messages = signal<string[]>([]);
 
+   // 🟡 Understanding the Importance of Writing Efficient Template Binding
    get debugOutput() {
-      console.log('[Messages] "debugOutput" binding re-evaluated.');
+      console.log('🟡 [Messages] "debugOutput" binding re-evaluated.');
       return 'Messages Component Debug Output';
    }
 

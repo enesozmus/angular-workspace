@@ -5,8 +5,9 @@ import { Component } from '@angular/core';
    templateUrl: './app.component.html',
 })
 export class AppComponent {
+   // 🟡 Understanding the Importance of Writing Efficient Template Binding
    get debugOutput() {
-      console.log('[AppComponent] "debugOutput" binding re-evaluated.');
+      console.log('🟡 [AppComponent] "debugOutput" binding re-evaluated.');
       return 'AppComponent Component Debug Output';
    }
 }

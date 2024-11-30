@@ -6,8 +6,9 @@ import { Component } from '@angular/core';
    styleUrl: './info-message.component.css',
 })
 export class InfoMessageComponent {
+   // 🟡 Understanding the Importance of Writing Efficient Template Binding
    get debugOutput() {
-      console.log('[InfoMessages] "debugOutput" binding re-evaluated.');
+      console.log('🟡 [InfoMessages] "debugOutput" binding re-evaluated.');
       return 'InfoMessage Component Debug Output';
    }
 

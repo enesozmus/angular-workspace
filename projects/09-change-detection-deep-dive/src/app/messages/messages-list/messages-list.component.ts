@@ -8,8 +8,9 @@ import { Component, input } from '@angular/core';
 export class MessagesListComponent {
    messages = input.required<string[]>();
 
+   // 🟡 Understanding the Importance of Writing Efficient Template Binding
    get debugOutput() {
-      console.log('[MessagesList] "debugOutput" binding re-evaluated.');
+      console.log('🟡 [MessagesList] "debugOutput" binding re-evaluated.');
       return 'MessagesList Component Debug Output';
    }
 }
