@@ -1,9 +1,11 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 
 @Component({
    selector: 'app-messages',
    templateUrl: './messages.component.html',
    styleUrl: './messages.component.css',
+   // Yalnızda kendisi ve child component'lerindeki değişikliklere duyarlı hale gelir.
+   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MessagesComponent {
    messages = signal<string[]>([]);
