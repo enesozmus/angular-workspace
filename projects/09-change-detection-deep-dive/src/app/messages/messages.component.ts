@@ -4,11 +4,12 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
    selector: 'app-messages',
    templateUrl: './messages.component.html',
    styleUrl: './messages.component.css',
+   standalone: false,
    // Yalnızda kendisi ve child component'lerindeki değişikliklere duyarlı hale gelir.
    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MessagesComponent {
-   messages = signal<string[]>([]);
+   // messages = signal<string[]>([]);
 
    // 🟡 Understanding the Importance of Writing Efficient Template Binding
    get debugOutput() {
@@ -16,7 +17,7 @@ export class MessagesComponent {
       return 'Messages Component Debug Output';
    }
 
-   onAddMessage(message: string) {
-      this.messages.update(oldMessages => [...oldMessages, message]);
-   }
+   // onAddMessage(message: string) {
+   //    this.messages.update(oldMessages => [...oldMessages, message]);
+   // }
 }

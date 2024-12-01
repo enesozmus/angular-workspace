@@ -4,6 +4,7 @@ import { ChangeDetectionStrategy, Component, inject, NgZone, OnInit, signal } fr
    selector: 'app-counter',
    templateUrl: './counter.component.html',
    styleUrl: './counter.component.css',
+   standalone: false,
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CounterComponent implements OnInit {

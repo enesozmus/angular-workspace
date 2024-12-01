@@ -1,15 +1,19 @@
-import { ChangeDetectionStrategy, Component, output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, output, signal } from '@angular/core';
+import { MessagesService } from '../../services/messages.service';
 
 @Component({
    selector: 'app-new-message',
    templateUrl: './new-message.component.html',
    styleUrl: './new-message.component.css',
+   standalone: false,
    changeDetection: ChangeDetectionStrategy.OnPush
 
 })
 export class NewMessageComponent {
-   add = output<string>();
-   enteredText = signal('');
+   private messagesService = inject(MessagesService);
+   enteredText = '';
+   // add = output<string>();
+   // enteredText = signal('');
 
    // 🟡 Understanding the Importance of Writing Efficient Template Binding
    get debugOutput() {
@@ -18,7 +22,9 @@ export class NewMessageComponent {
    }
 
    onSubmit() {
-      this.add.emit(this.enteredText());
-      this.enteredText.set('');
+      this.messagesService.addMessage(this.enteredText);
+      this.enteredText = '';
+      // this.add.emit(this.enteredText());
+      // this.enteredText.set('');
    }
 }

@@ -4,6 +4,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
    selector: 'app-info-message',
    templateUrl: './info-message.component.html',
    styleUrl: './info-message.component.css',
+   standalone: false,
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InfoMessageComponent {
