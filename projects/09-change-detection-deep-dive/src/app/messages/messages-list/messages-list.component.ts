@@ -1,8 +1,11 @@
 import {
    ChangeDetectionStrategy,
+   ChangeDetectorRef,
    Component,
+   DestroyRef,
    inject,
    input,
+   OnInit,
 } from '@angular/core';
 import { MessagesService } from '../../services/messages.service';
 
@@ -23,16 +26,36 @@ import { MessagesService } from '../../services/messages.service';
     * So what can you do in situations like this?
     * 🟢 That's exactly what we'll take a look at!
     */
-   //
+   /**
+    * So how can we get change detection to run again for the MessagesListComponent?
+    * Well, we in the end need to trigger it manually, and Angular gives you the tools for triggering it manually.
+    * It gives you an object you can inject into your components to trigger change detection in those components.
+    * And you can call a method on that service to trigger change detection.
+    */
    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MessagesListComponent {
-   private messagesService = inject(MessagesService);
+export class MessagesListComponent implements OnInit {
    // messages = input.required<string[]>();
+   private messagesService = inject(MessagesService);
+   private cdRef = inject(ChangeDetectorRef);
+   private destroyRef = inject(DestroyRef);
 
-   get messages() {
-      return this.messagesService.allMessages;
-   }
+   // get messages() {
+   //    return this.messagesService.allMessages;
+   // }
+
+   messages: string[] = [];
+
+   ngOnInit() {
+      const subscription = this.messagesService.messages$.subscribe((messages) => {
+        this.messages = messages;
+        this.cdRef.markForCheck();
+      });
+      // 🟡 clean subscription
+      this.destroyRef.onDestroy(() => {
+        subscription.unsubscribe();
+      });
+    }
 
    // 🟡 Understanding the Importance of Writing Efficient Template Binding
    get debugOutput() {
