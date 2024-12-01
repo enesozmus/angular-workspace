@@ -1187,9 +1187,7 @@
             "outputPath": "dist/09-change-detection-deep-dive",
             "index": "projects/09-change-detection-deep-dive/src/index.html",
             "browser": "projects/09-change-detection-deep-dive/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": [],
             "tsConfig": "projects/09-change-detection-deep-dive/tsconfig.app.json",
             "assets": [
               {

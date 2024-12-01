@@ -10,6 +10,8 @@ import { NewMessageComponent } from './messages/new-message/new-message.componen
 import { InfoMessageComponent } from './info-message/info-message.component';
 import { MessagesListComponent } from './messages/messages-list/messages-list.component';
 
+import { provideExperimentalZonelessChangeDetection } from "@angular/core";
+
 @NgModule({
    declarations: [
       AppComponent,
@@ -20,7 +22,11 @@ import { MessagesListComponent } from './messages/messages-list/messages-list.co
       MessagesListComponent,
    ],
    imports: [BrowserModule, AppRoutingModule, FormsModule],
-   providers: [],
+   /**
+    * 🔴 In angular 18, Zoneless is experimental. But when it's stable, it will be the preferred approach.
+    * Now it really comes down to 'signals' telling Angular that something changed and that's it.
+    */
+   providers: [provideExperimentalZonelessChangeDetection()],
    bootstrap: [AppComponent],
 })
 export class AppModule {}

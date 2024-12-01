@@ -11,9 +11,9 @@ import { MessagesService } from '../../services/messages.service';
 })
 export class NewMessageComponent {
    private messagesService = inject(MessagesService);
-   enteredText = '';
+   // enteredText = '';
    // add = output<string>();
-   // enteredText = signal('');
+   enteredText = signal('');
 
    // 🟡 Understanding the Importance of Writing Efficient Template Binding
    get debugOutput() {
@@ -22,9 +22,10 @@ export class NewMessageComponent {
    }
 
    onSubmit() {
-      this.messagesService.addMessage(this.enteredText);
-      this.enteredText = '';
+      // this.messagesService.addMessage(this.enteredText);
+      this.messagesService.addMessage(this.enteredText());
+      // this.enteredText = '';
       // this.add.emit(this.enteredText());
-      // this.enteredText.set('');
+      this.enteredText.set('');
    }
 }

@@ -37,9 +37,10 @@ import { MessagesService } from '../../services/messages.service';
 export class MessagesListComponent {
    // messages = input.required<string[]>();
    private messagesService = inject(MessagesService);
+   messages = this.messagesService.allMessages;
    // private cdRef = inject(ChangeDetectorRef);
    // private destroyRef = inject(DestroyRef);
-   messages$ = this.messagesService.messages$;
+   // messages$ = this.messagesService.messages$;
 
    // get messages() {
    //    return this.messagesService.allMessages;
