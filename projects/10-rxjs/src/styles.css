@@ -67,3 +67,20 @@ p {
 header {
   text-align: center;
 }
+
+button {
+  font: inherit;
+  padding: 0.35rem 1rem;
+  border-radius: 4px;
+  background-color: #c36eed;
+  border: 1px solid #c36eed;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+button:is(:hover, :focus-visible) {
+  background-color: #bf86dc;
+  border-color: #bd56f1;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+}
