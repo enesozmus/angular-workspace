@@ -59,6 +59,11 @@ h1 {
   font-size: 3.2rem;
 }
 
+p {
+  text-align: center;
+  margin-top: 1rem;
+}
+
 header {
   text-align: center;
 }
