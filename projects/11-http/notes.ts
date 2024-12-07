@@ -36,3 +36,34 @@
  * Örneğin, 'Stripe' işletmeler için ödeme işleme hizmeti sağlayan bir şirkettir ve geliştiricilerin bu hizmeti sistemlerine entegre etmelerini sağlayan sağlam bir API sunar. Geliştiriciler, Stripe'ın API'sini kullanarak uygulamalarına ihtiyaç duyduklarında ödeme işleme veya abonelik yönetimi ekleyebilir ve her hizmet için raporlar toplayabilirler.
  * Yukarıda sözü edilen böyle bir bağlantının, iletişimin veya arayüzün nasıl kullanılabileceğini açıklayan bir belge veya standarda 'API spesifikasyonu' denir.
  */
+
+/** 🔴 APIs | Web Services
+ * 
+    API'lar ve bir API türü olan Web servisler nihayetinde bir iletişim aracı olarak hizmet ederler. Her ikisi de internet üzerinden uygulamalar arasında veri transferini
+  kolaylaştırabilse de aynı şey değildirler ve bu terimler her durumda birbirinin yerine kullanılmamalıdır.
+  
+    Temel fark, web servislerinin bir API türü olmasıdır: Tüm web servisleri birer API'dır ancak tüm API'lar web servisi değildir.
+
+    Arasındaki diğer belirgin farklara göz atalım:
+      1. Web servisleri iletişim kurmak için internet ağını kullanır. Ancak API'ların internet ağı kullanması gerekmez. Elbette kullanabilirler, ancak çevrimdışı da çalışabilirler. Örneğin, aynı bilgisayardaki iki uygulama API'ler aracılığıyla entegre olabilir. Ağ olmadan da veri aktarabilirsiniz.
+      2. Bir API'ın her zaman web tabanlı olması gerekmez.
+      3. Web servisleri, SOAP'ın belirli bir yapı gerektirmesi gibi katı iletişim kurallarını takip ederken, API'lar çok daha fazla esnekliğe sahiptirler.
+ */
+
+/** 🔴 Web Service
+ * 
+    Bir web servisi, iki ayrı makinenin iki farklı sistemin bir ağ üzerinden birbirleriyle iletişim kurmasının standartlaştırılmış bir yoludur. Bir web servisi de
+  bir API olmasından mütevellit doğrudan insanlara değil, diğer programlara, yazılımlara uygulamalara yöneliktir. Web servisinin amacı da bir yazılım tarafından
+  tüketilmektir.
+  
+    Sıfırdan tamamen yeni bir haritalama programı yazabilir veya Google Maps'in sağladığı bir web servisini kullanabilir ona adresi gönderebilir ve programınızda
+  görüntüleyebileceğiniz konumun grafiksel bir haritasını döndürebilirsiniz.
+  
+    Herhangi bir web sitesi için tarayıcınızı kullandığınızda karşılaştığınız şey HTML sayfalarıdır. Bunlar, çok sayıda verinin bir araya sıkıştırılmış olabileceği
+  insan tarafından okunabilen sayfalardır, çünkü bu insanlar için mantıklıdır. Şimdi başka birinin bu verilerin bir kısmını kullanmak istediğini düşünün. Sayfanızı
+  indirebilir ve istedikleri verileri elde etmek için tüm "gürültüyü" filtrelemeye başlayabilirler, ancak çoğu web sitesi, verilerin tüm öğeler için aynı yere
+  yerleştirileceğinden %100 emin olacak şekilde oluşturulmamıştır, bu nedenle hantal olmasının yanı sıra güvenilmez hale de gelir. Bir web servisi, bir web
+  sitesinin web sitenizden veri okumak, güncellemek ve/veya silmek isteyenlere sunmayı seçtiği bir şeydir. Buna verilerinize bir "arka kapı" diyebilirsiniz.
+  Tüm web servisleri için ortak olan şey, sitenin sunduğu web sayfalarının makine tarafından okunabilir eşdeğeri olmalarıdır. Bu, verileri kullanmak isteyen
+  diğerlerinin ayrıştırılması ve kullanılması kolay belirli verileri geri almak için bir istek gönderebileceği anlamına gelir.
+ */
