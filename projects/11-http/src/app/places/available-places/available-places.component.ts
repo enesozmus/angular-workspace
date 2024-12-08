@@ -15,16 +15,26 @@ import { PlacesContainerComponent } from '../places-container/places-container.c
 })
 export class AvailablePlacesComponent implements OnInit {
   places = signal<Place[] | undefined>(undefined);
+  // ⭐ Showing a Loading Fallback
+  isFetching = signal(false);
 
   private httpClient = inject(HttpClient);
   private destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
+    // ⭐ Showing a Loading Fallback
+    this.isFetching.set(true);
     // 🔵 Fetching JSON data
     const subscription = this.httpClient
       .get<{ places: Place[] }>('http://localhost:3000/places')
       .pipe(map((response) => response.places))
-      .subscribe((places) => this.places.set(places));
+      .subscribe({
+        next: (places) => this.places.set(places),
+        complete: () => {
+          // ⭐ Showing a Loading Fallback
+          this.isFetching.set(false);
+        },
+      });
 
     // 🔵 Gerçek response'u incelemek ve tüm respone erişmek için, observe seçeneğini 'response' olarak ayarlayın
     const subscription2 = this.httpClient
@@ -56,7 +66,7 @@ export class AvailablePlacesComponent implements OnInit {
       })
       .subscribe((event) => {
         console.log('⭐', event);
-        
+
         // switch (event.type) {
         //   case HttpEventType.UploadProgress:
         //     console.log(
