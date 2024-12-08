@@ -68,7 +68,7 @@
   diğerlerinin ayrıştırılması ve kullanılması kolay belirli verileri geri almak için bir istek gönderebileceği anlamına gelir.
  */
 
-/** 🔴 Connecting Angular Apps to a Backen 
+/** 🔴 Connecting Angular Apps to a Backend
  * Çoğu front-end uygulamasının, veri indirmek veya yüklemek ve diğer back-end hizmetlerine erişmek için HTTP protokolü üzerinden bir sunucuyla iletişim kurması gerekir.
  * Angular, Angular uygulamaları için bir istemci HTTP API'si olan 'HttpClient' service class'ı sağlar.
  */
@@ -112,4 +112,38 @@
         constructor(private httpClient: HttpClient)
       2.
         private httpClient = inject(HttpClient);
+ */
+
+/**
+ * HttpClient, hem veri yüklemek hem de sunucuda mutasyonlar uygulamak amacıylaisteklerde bulunabilmek 
+ * ...için kullanılan farklı HTTP fiillerine karşılık gelen yöntemlere sahiptir.
+ * Her fonksiyon, abone (subscribe) olunduğunda isteği gönderen ve ardından sunucu yanıt verdiğinde sonuçları yayan bir RxJS Observable döndürür.
+ * HttpClient service'i tüm işlemler için RxJS Observable'ları kullanır.
+ * İstek metoduna geçirilen bir 'options nesnesi' aracılığıyla, isteğin çeşitli özellikleri ve döndürülen yanıt türü ayarlanabilir.
+ * Varsayılan olarak, HttpClient sunucuların JSON verisi döndüreceğini varsayar. JSON olmayan bir API ile etkileşim kurarken, HttpClient'a
+ * ...hangi yanıt türünün bekleneceğini ve istekte bulunurken döndürüleceğini söyleyebilirsiniz. Bu, responseType seçeneğiyle yapılır.
+
+    http.get('/images/dog.jpg', {responseType: 'arraybuffer'}).subscribe(buffer => {
+      console.log('The image is ' + buffer.byteLength + ' bytes large');
+    });
+
+ * 🔵 Fetching JSON data
+ * Bir arka uçtan veri almak genellikle HttpClient.get() yöntemini kullanarak bir GET isteği yapmayı gerektirir.
+ * Bu yöntem iki argüman alır: alınacağı dize uç noktası URL'i ve isteği yapılandırmak için isteğe bağlı bir options nesnesi.
+    
+    places = signal<Place[] | undefined>(undefined);
+
+    private httpClient = inject(HttpClient);
+    private destroyRef = inject(DestroyRef);
+
+    ngOnInit(): void {
+      const subscription = this.httpClient
+        .get<{ places: Place[] }>('http://localhost:3000/places')
+        .pipe(map((response) => response.places))
+        .subscribe((places) => this.places.set(places));
+
+      this.destroyRef.onDestroy(() => {
+        subscription.unsubscribe();
+      });
+    }
  */
