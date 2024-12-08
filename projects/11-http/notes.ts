@@ -126,6 +126,11 @@
  * Tüm HttpClient metotları için, metot, metotun döndürdüğü Observable'a abone olana kadar yani ilgili metot üzerinden subscribe() fonksiyonunu
   ...çağırana kadar ilgili HTTP request'ine başlamaz.
  * HttpClient metotlarından döndürülen tüm Observable'lar, tasarım gereği soğuktur. (cold)
+ * HttpClient, RxJS'nin "cold observable" olarak adlandırdığı şeyleri üretir, yani Observable abone olana kadar gerçek bir istek gerçekleşmez.
+ * Aynı Observable'a birden çok kez abone olmak ise birden çok back-end isteğini tetikler. Her abonelik bağımsızdır.
+ * İlgili response döndüğünde, HttpClient'tan gelen Observable'lar genellikle tamamlanır.
+ * Otomatik tamamlama nedeniyle, HttpClient abonelikleri temizlenmezse genellikle bellek sızıntısı riski yoktur.
+ * Ancak, herhangi bir asenkron işlemde olduğu gibi, bunları kullanan component yok edildiğinde abonelikleri temizlemenizi şiddetle öneririz.
 
  * <T> → Çıktıyı tüketmeyi daha kolay ve daha belirgin hale getirmek için HttpClient request'ini response nesnesinin türünü bildirecek şekilde yapılandırabilirsiniz.
  * 
@@ -178,6 +183,13 @@
       }
  */
 
-/** 🔵
- *
+/** 🔵 Handling request failure
+ * Bir HTTP request'inin başarısız olmasının iki yolu vardır:
+    1. Bir ağ veya bağlantı hatası, ilgili request'in back-end sunucusuna ulaşmasını engelleyebilir.
+    2. Back-end ilgili request'i alabilir ancak işleme koyamayabilir ve bir hata yanıtı döndürebilir.
+
+ * HttpClient, Observable'ın hata kanalından döndürdüğü bir HttpErrorResponse'da her iki tür hatayı da yakalar.
+ * RxJS library, hata işleme için yararlı olabilecek çeşitli operatörler sunar.
+ * Bazen ağ kesintileri gibi geçici hatalar bir isteğin beklenmedik şekilde başarısız olmasına neden olabilir ve isteği yeniden denemek, isteğin başarılı olmasını sağlar.
+ * RxJS, belirli koşullar altında başarısız olan bir Observable'a otomatik olarak yeniden abone olan çeşitli yeniden deneme operatörleri de sağlar.
  */

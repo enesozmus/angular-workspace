@@ -1,6 +1,6 @@
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { HttpClient, HttpEventType } from '@angular/common/http';
-import { map } from 'rxjs';
+import { catchError, map, throwError } from 'rxjs';
 
 import { Place } from '../../models/place.model';
 import { PlacesComponent } from '../places.component';
@@ -17,6 +17,8 @@ export class AvailablePlacesComponent implements OnInit {
   places = signal<Place[] | undefined>(undefined);
   // ⭐ Showing a Loading Fallback
   isFetching = signal(false);
+  // 🔻 Handling request failure
+  error = signal('');
 
   private httpClient = inject(HttpClient);
   private destroyRef = inject(DestroyRef);
@@ -27,9 +29,29 @@ export class AvailablePlacesComponent implements OnInit {
     // 🔵 Fetching JSON data
     const subscription = this.httpClient
       .get<{ places: Place[] }>('http://localhost:3000/places')
-      .pipe(map((response) => response.places))
+      .pipe(
+        map((response) => response.places),
+        // optional
+        catchError((error: Error) => {
+          console.log(error);
+          return throwError(
+            () =>
+              new Error(
+                'Something went wrong fetching the available places. Please try again later.'
+              )
+          );
+        })
+      )
       .subscribe({
         next: (places) => this.places.set(places),
+        // 🔻 Handling request failure
+        error: (error: Error) => {
+          console.log(error);
+          // this.error.set(error.message);
+          this.error.set(
+            'Something went wrong fetching the available places. Please try again later.'
+          );
+        },
         complete: () => {
           // ⭐ Showing a Loading Fallback
           this.isFetching.set(false);
