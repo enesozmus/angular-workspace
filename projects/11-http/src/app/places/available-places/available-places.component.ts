@@ -1,5 +1,5 @@
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEventType } from '@angular/common/http';
 import { map } from 'rxjs';
 
 import { Place } from '../../models/place.model';
@@ -20,13 +20,58 @@ export class AvailablePlacesComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
+    // 🔵 Fetching JSON data
     const subscription = this.httpClient
       .get<{ places: Place[] }>('http://localhost:3000/places')
       .pipe(map((response) => response.places))
       .subscribe((places) => this.places.set(places));
 
+    // 🔵 Gerçek response'u incelemek ve tüm respone erişmek için, observe seçeneğini 'response' olarak ayarlayın
+    const subscription2 = this.httpClient
+      .get<{ places: Place[] }>('http://localhost:3000/places', {
+        observe: 'response',
+      })
+      .subscribe((response) => {
+        console.log(response);
+        console.log('Body:', response.body);
+        console.log('Headers:', response.headers);
+        console.log('Response status:', response.status);
+        console.log('Places:', response.body?.places);
+      });
+
+    // 🔵 HttpClient, yanıt gövdesine veya yanıt nesnesine ek olarak, istek yaşam döngüsündeki (the request lifecycle) belirli anlara karşılık gelen bir ham olay akışı (a stream of raw events) da döndürebilir
+    // → Bu event'ler, isteğin gönderildiği zamanı, yanıt başlığının döndürüldüğü zamanı ve gövdenin tamamlandığı zamanı içerir.
+    // → Bu event'ler, ayrıca büyük istek veya yanıt gövdeleri için yükleme ve indirme durumunu bildiren ilerleme olaylarını da içerebilir.
+    // → → HttpEventType.Sent             → The request has been dispatched to the server
+    // → → HttpEventType.UploadProgress   → An HttpUploadProgressEvent reporting progress on uploading the request body
+    // → → HttpEventType.ResponseHeader   → The head of the response has been received, including status and headers
+    // → → HttpEventType.DownloadProgress	→ An HttpDownloadProgressEvent reporting progress on downloading the response body
+    // → → HttpEventType.Response	        → The entire response has been received, including the response body
+    // → → HttpEventType.User	            → A custom event from an Http interceptor.
+    // → 🔺 Bu durumda daha önce olduğu gibi sadece bir kez değil, birden çok kez tetiklenecektir.
+    const subscription3 = this.httpClient
+      .get<{ places: Place[] }>('http://localhost:3000/places', {
+        observe: 'events',
+        reportProgress: true,
+      })
+      .subscribe((event) => {
+        console.log('⭐', event);
+        
+        // switch (event.type) {
+        //   case HttpEventType.UploadProgress:
+        //     console.log(
+        //       'Uploaded ' + event.loaded + ' out of ' + event.total + ' bytes'
+        //     );
+        //     break;
+        //   case HttpEventType.Response:
+        //     console.log('Finished uploading!');
+        //     break;
+        // }
+      });
+
     this.destroyRef.onDestroy(() => {
       subscription.unsubscribe();
+      subscription2.unsubscribe();
     });
   }
 }

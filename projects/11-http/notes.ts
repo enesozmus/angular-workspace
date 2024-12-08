@@ -32,8 +32,11 @@
 
  
  * Web sayfaları insanların birbirleriyle iletişim kurmasını ve işbirliği yapmasını sağlar. API'lar da programların birbirleriyle iletişim kurmasını ve işbirliği yapmasını sağlar.
- * Örneğin, bir API sunan bir hava durumu sensörünü ele alalım. Sensöre belirli bir mesaj iletildiğinde, mevcut hava koşullarını algılayacak ve bir hava durumu raporuyla yanıt verecektir. Sensörü etkinleştiren mesaj bir API çağrısıdır ve hava durumu raporu bir API yanıtıdır. Bir hava durumu tahmin uygulaması, coğrafi bir alandan hava durumu verileri toplayarak bir dizi hava durumu sensörü API'yıyla entegre olabilir.
- * Örneğin, 'Stripe' işletmeler için ödeme işleme hizmeti sağlayan bir şirkettir ve geliştiricilerin bu hizmeti sistemlerine entegre etmelerini sağlayan sağlam bir API sunar. Geliştiriciler, Stripe'ın API'sini kullanarak uygulamalarına ihtiyaç duyduklarında ödeme işleme veya abonelik yönetimi ekleyebilir ve her hizmet için raporlar toplayabilirler.
+ * Örneğin, bir API sunan bir hava durumu sensörünü ele alalım. Sensöre belirli bir mesaj iletildiğinde, mevcut hava koşullarını algılayacak ve bir hava durumu raporuyla yanıt verecektir.
+  ...Sensörü etkinleştiren mesaj bir API çağrısıdır ve hava durumu raporu bir API yanıtıdır. Bir hava durumu tahmin uygulaması, coğrafi bir alandan hava durumu verileri toplayarak bir dizi
+  ...hava durumu sensörü API'yıyla entegre olabilir.
+ * Örneğin, 'Stripe' işletmeler için ödeme işleme hizmeti sağlayan bir şirkettir ve geliştiricilerin bu hizmeti sistemlerine entegre etmelerini sağlayan sağlam bir API sunar.
+  ...Geliştiriciler, Stripe'ın API'sini kullanarak uygulamalarına ihtiyaç duyduklarında ödeme işleme veya abonelik yönetimi ekleyebilir ve her hizmet için raporlar toplayabilirler.
  * Yukarıda sözü edilen böyle bir bağlantının, iletişimin veya arayüzün nasıl kullanılabileceğini açıklayan bir belge veya standarda 'API spesifikasyonu' denir.
  */
 
@@ -45,7 +48,8 @@
     Temel fark, web servislerinin bir API türü olmasıdır: Tüm web servisleri birer API'dır ancak tüm API'lar web servisi değildir.
 
     Arasındaki diğer belirgin farklara göz atalım:
-      1. Web servisleri iletişim kurmak için internet ağını kullanır. Ancak API'ların internet ağı kullanması gerekmez. Elbette kullanabilirler, ancak çevrimdışı da çalışabilirler. Örneğin, aynı bilgisayardaki iki uygulama API'ler aracılığıyla entegre olabilir. Ağ olmadan da veri aktarabilirsiniz.
+      1. Web servisleri iletişim kurmak için internet ağını kullanır. Ancak API'ların internet ağı kullanması gerekmez. Elbette kullanabilirler, ancak çevrimdışı da çalışabilirler.
+        Örneğin, aynı bilgisayardaki iki uygulama API'ler aracılığıyla entegre olabilir. Ağ olmadan da veri aktarabilirsiniz.
       2. Bir API'ın her zaman web tabanlı olması gerekmez.
       3. Web servisleri, SOAP'ın belirli bir yapı gerektirmesi gibi katı iletişim kurallarını takip ederken, API'lar çok daha fazla esnekliğe sahiptirler.
  */
@@ -114,36 +118,66 @@
         private httpClient = inject(HttpClient);
  */
 
-/**
- * HttpClient, hem veri yüklemek hem de sunucuda mutasyonlar uygulamak amacıylaisteklerde bulunabilmek 
- * ...için kullanılan farklı HTTP fiillerine karşılık gelen yöntemlere sahiptir.
- * Her fonksiyon, abone (subscribe) olunduğunda isteği gönderen ve ardından sunucu yanıt verdiğinde sonuçları yayan bir RxJS Observable döndürür.
- * HttpClient service'i tüm işlemler için RxJS Observable'ları kullanır.
- * İstek metoduna geçirilen bir 'options nesnesi' aracılığıyla, isteğin çeşitli özellikleri ve döndürülen yanıt türü ayarlanabilir.
- * Varsayılan olarak, HttpClient sunucuların JSON verisi döndüreceğini varsayar. JSON olmayan bir API ile etkileşim kurarken, HttpClient'a
- * ...hangi yanıt türünün bekleneceğini ve istekte bulunurken döndürüleceğini söyleyebilirsiniz. Bu, responseType seçeneğiyle yapılır.
+/** 🔴 Making HTTP requests
+ * HttpClient, hem veri yüklemek hem de sunucuda mutasyonlar uygulamak amacıyla isteklerde bulunabilmek
+  ...için kullanılan farklı HTTP fiillerine karşılık gelen metotlara sahiptir.
+
+ * Her bir metot, kendisine abone olunduğunda isteği gönderen ve ardından sunucu yanıt verdiğinde sonuçları yayan bir RxJS Observable döndürür.
+ * Tüm HttpClient metotları için, metot, metotun döndürdüğü Observable'a abone olana kadar yani ilgili metot üzerinden subscribe() fonksiyonunu
+  ...çağırana kadar ilgili HTTP request'ine başlamaz.
+ * HttpClient metotlarından döndürülen tüm Observable'lar, tasarım gereği soğuktur. (cold)
+
+ * <T> → Çıktıyı tüketmeyi daha kolay ve daha belirgin hale getirmek için HttpClient request'ini response nesnesinin türünü bildirecek şekilde yapılandırabilirsiniz.
+ * 
+ * 
+ 
+ * GET metoduna geçirilen bir 'options nesnesi' aracılığıyla, isteğin çeşitli özellikleri ve döndürülen yanıt türü ayarlanabilir.
+
+ * Varsayılan olarak, HttpClient sunucuların JSON verisi döndüreceğini varsayar.
+ * JSON olmayan bir API ile etkileşim kurarken, HttpClient'a hangi yanıt türünün bekleneceğini ve istekte bulunurken döndürüleceğini söyleyebilirsiniz.
+ * Bu, 'responseType' seçeneğiyle yapılır.
 
     http.get('/images/dog.jpg', {responseType: 'arraybuffer'}).subscribe(buffer => {
       console.log('The image is ' + buffer.byteLength + ' bytes large');
     });
+ */
 
- * 🔵 Fetching JSON data
- * Bir arka uçtan veri almak genellikle HttpClient.get() yöntemini kullanarak bir GET isteği yapmayı gerektirir.
- * Bu yöntem iki argüman alır: alınacağı dize uç noktası URL'i ve isteği yapılandırmak için isteğe bağlı bir options nesnesi.
-    
-    places = signal<Place[] | undefined>(undefined);
+/** 🔵 Making a GET request
+ * Bir back-end'den veri almak genellikle HttpClient.get() yöntemini kullanarak bir GET isteği yapmayı gerektirir.
+ * Bu metot iki argüman alır:
+      1. verinin nereden alınacağını ifade eden string türünde bir endpoint URL'i
+      2. ilgili request'i yapılandırabilmek için object türünde optinal bir options nesnesi
+ 
+    get<T>(url: string, options?: {...}): : Observable<HttpResponse<T>>
+    get(url: string, options?: {...}): : Observable<HttpResponse<Object>>
 
-    private httpClient = inject(HttpClient);
-    private destroyRef = inject(DestroyRef);
+        options: {
+          headers?: HttpHeaders | {[header: string]: string | string[]},
+          observe?: 'body' | 'events' | 'response',
+          params?: HttpParams|{[param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>},
+          reportProgress?: boolean,
+          responseType?: 'arraybuffer'|'blob'|'json'|'text',
+          withCredentials?: boolean,
+        }
 
-    ngOnInit(): void {
-      const subscription = this.httpClient
-        .get<{ places: Place[] }>('http://localhost:3000/places')
-        .pipe(map((response) => response.places))
-        .subscribe((places) => this.places.set(places));
+    🔵
+      places = signal<Place[] | undefined>(undefined);
 
-      this.destroyRef.onDestroy(() => {
-        subscription.unsubscribe();
-      });
-    }
+      private httpClient = inject(HttpClient);
+      private destroyRef = inject(DestroyRef);
+
+      ngOnInit(): void {
+        const subscription = this.httpClient
+          .get<{ places: Place[] }>('http://localhost:3000/places')
+          .pipe(map((response) => response.places))
+          .subscribe((places) => this.places.set(places));
+
+        this.destroyRef.onDestroy(() => {
+          subscription.unsubscribe();
+        });
+      }
+ */
+
+/** 🔵
+ *
  */
