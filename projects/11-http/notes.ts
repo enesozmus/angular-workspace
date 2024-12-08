@@ -67,3 +67,49 @@
   Tüm web servisleri için ortak olan şey, sitenin sunduğu web sayfalarının makine tarafından okunabilir eşdeğeri olmalarıdır. Bu, verileri kullanmak isteyen
   diğerlerinin ayrıştırılması ve kullanılması kolay belirli verileri geri almak için bir istek gönderebileceği anlamına gelir.
  */
+
+/** 🔴 Connecting Angular Apps to a Backen 
+ * Çoğu front-end uygulamasının, veri indirmek veya yüklemek ve diğer back-end hizmetlerine erişmek için HTTP protokolü üzerinden bir sunucuyla iletişim kurması gerekir.
+ * Angular, Angular uygulamaları için bir istemci HTTP API'si olan 'HttpClient' service class'ı sağlar.
+ */
+
+/** 🔴 HttpClient
+ * Bu service class'ı, HTTP isteklerini gerçekleştirmek için ilgili fonksiyonlarla birlikte enjekte edilebilir bir class olarak kullanılabilir.
+
+ * 🔻 Providing HttpClient through dependency injection
+
+  → provideHttpClient()
+  → Angular'ın `HttpClient` service'inin enjeksiyon için kullanılabilir olacak şekilde yapılandırır.
+
+      🔵
+      export const appConfig: ApplicationConfig = {
+        providers: [
+          provideHttpClient(),
+        ]
+      };
+
+      🔵
+      @NgModule({
+        providers: [
+          provideHttpClient(),
+        ],
+      })
+      export class AppModule {}
+
+      🔵
+      import { HttpClientModule } from '@angular/common/http';
+      @NgModule({
+        imports: [
+          BrowserModule,
+          // import HttpClientModule after BrowserModule.
+          HttpClientModule,
+        ],
+        ...
+      })
+      export class AppModule {}
+
+      1.
+        constructor(private httpClient: HttpClient)
+      2.
+        private httpClient = inject(HttpClient);
+ */
