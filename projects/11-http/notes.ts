@@ -193,3 +193,18 @@
  * Bazen ağ kesintileri gibi geçici hatalar bir isteğin beklenmedik şekilde başarısız olmasına neden olabilir ve isteği yeniden denemek, isteğin başarılı olmasını sağlar.
  * RxJS, belirli koşullar altında başarısız olan bir Observable'a otomatik olarak yeniden abone olan çeşitli yeniden deneme operatörleri de sağlar.
  */
+
+/** 🔵 Making a POST request
+ * Sunucu tarafındaki değişimleri gerçekleştiren server API'ları genellikle yeni durumu veya yapılacak değişikliği belirten bir request body'siyle POST request'leri yapmayı gerektirir.
+ * HttpClient.post() metotu get()'e benzer şekilde davranır bir kaynak URL'i, 'options' parametresi ve ek olarak 'options' parametresinden önce bir body argümanı kabul eder:
+ * url, body, options
+ 
+ * İlgili request body'sine birçok farklı türde değer sağlanabilir ve HttpClient bunları buna göre serileştirir:
+ 
+ * İlgili request'i gerçekten ateşlemek için Observable'ları mutasyona uğratmak amacıyla .subscribe() kullanmayı unutmayın.
+ * You must call subscribe() or nothing happens!
+
+        http.post<Config>('/api/config', newConfig).subscribe(config => {
+          console.log('Updated config:', config);
+        });
+ */
