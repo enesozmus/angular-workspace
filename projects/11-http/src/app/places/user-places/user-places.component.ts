@@ -12,7 +12,7 @@ import { PlacesService } from '../../services/places.service';
   styleUrl: './user-places.component.css',
 })
 export class UserPlacesComponent implements OnInit {
-  places = signal<Place[] | undefined>(undefined);
+  // places = signal<Place[] | undefined>(undefined);
   // ⭐ Showing a Loading Fallback
   isFetching = signal(false);
   // 🔻 Handling request failure
@@ -21,14 +21,16 @@ export class UserPlacesComponent implements OnInit {
   private placesService = inject(PlacesService);
   private destroyRef = inject(DestroyRef);
 
+  places = this.placesService.loadedUserPlaces;
+
   ngOnInit(): void {
     // ⭐ Showing a Loading Fallback
     this.isFetching.set(true);
     // 🔵 Fetching JSON data
     const subscription = this.placesService.loadUserPlaces().subscribe({
-      next: (places) => {
-        this.places.set(places);
-      },
+      // next: (places) => {
+      //   this.places.set(places);
+      // },
       // 🔻 Handling request failure
       error: (error: Error) => {
         this.error.set(error.message);

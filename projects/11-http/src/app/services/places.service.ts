@@ -1,7 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { Place } from '../models/place.model';
 import { HttpClient } from '@angular/common/http';
-import { catchError, map, throwError } from 'rxjs';
+import { catchError, map, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -27,15 +27,28 @@ export class PlacesService {
     return this.fetchPlaces(
       'http://localhost:3000/user-places',
       'Something went wrong fetching your favorite places. Please try again later.'
-    );
+    ).pipe(tap({ next: (userPlaces) => this.userPlaces.set(userPlaces) }));
   }
 
   // 🔵
   // 🔵🔵
-  addPlaceToUserPlaces(placeId: string) {
-    return this.httpClient.put('http://localhost:3000/user-places', {
-      placeId,
-    });
+  addPlaceToUserPlaces(place: Place) {
+    const prevPlaces = this.userPlaces();
+
+    if (!prevPlaces.some((p) => p.id === place.id)) {
+      this.userPlaces.set([...prevPlaces, place]);
+    }
+
+    return this.httpClient
+      .put('http://localhost:3000/user-places', {
+        placeId: place.id,
+      })
+      .pipe(
+        catchError((error) => {
+          this.userPlaces.set(prevPlaces);
+          return throwError(() => new Error('Failed to store selected place.'));
+        })
+      );
   }
 
   // 🔵
