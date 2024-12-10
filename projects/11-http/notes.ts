@@ -54,7 +54,7 @@
       3. Web servisleri, SOAP'ın belirli bir yapı gerektirmesi gibi katı iletişim kurallarını takip ederken, API'lar çok daha fazla esnekliğe sahiptirler.
  */
 
-/** 🔴 Web Service
+/** 🔴 Web Services
  * 
     Bir web servisi, iki ayrı makinenin iki farklı sistemin bir ağ üzerinden birbirleriyle iletişim kurmasının standartlaştırılmış bir yoludur. Bir web servisi de
   bir API olmasından mütevellit doğrudan insanlara değil, diğer programlara, yazılımlara uygulamalara yöneliktir. Web servisinin amacı da bir yazılım tarafından
@@ -71,6 +71,7 @@
   Tüm web servisleri için ortak olan şey, sitenin sunduğu web sayfalarının makine tarafından okunabilir eşdeğeri olmalarıdır. Bu, verileri kullanmak isteyen
   diğerlerinin ayrıştırılması ve kullanılması kolay belirli verileri geri almak için bir istek gönderebileceği anlamına gelir.
  */
+
 
 /** 🔴 Connecting Angular Apps to a Backend
  * Çoğu front-end uygulamasının, veri indirmek veya yüklemek ve diğer back-end hizmetlerine erişmek için HTTP protokolü üzerinden bir sunucuyla iletişim kurması gerekir.
@@ -117,6 +118,65 @@
       2.
         private httpClient = inject(HttpClient);
  */
+
+/** 🔴 Configuring features of HttpClient
+ * provideHttpClient, client'ın farklı yönlerinin davranışını etkinleştirmek veya yapılandırmak için (isteğe bağlı olarak) özellik yapılandırmalarının bir listesini kabul eder.
+
+ * 🟠 withFetch()
+ * Varsayılan olarak, HttpClient isteklerde bulunmak için XMLHttpRequest API'ını kullanır.
+ * withFetch() özelliği istemciyi bunun yerine fetch API'ını kullanmaya geçirir.
+ * 'fetch' daha modern bir API'dır ve XMLHttpRequest'in desteklenmediği birkaç ortamda kullanılabilir.
+
+      export const appConfig: ApplicationConfig = {
+        providers: [
+          provideHttpClient(
+            withFetch(),
+          ),
+        ]
+      };
+
+ * 🟠 withInterceptors(...)
+ * withInterceptors(), HttpClient aracılığıyla yapılan istekleri işleyecek olan 'interceptor functions' kümesini yapılandırır.
+ 
+ * 🟠 withInterceptorsFromDi()
+ * withInterceptorsFromDi(), HttpClient yapılandırmasında class-tabanlı interceptor'ların eski stilini içerir.
+ * 🔻 Functional interceptors (through withInterceptors) have more predictable ordering and we recommend them over DI-based interceptors.
+
+ * 🟠 withRequestsMadeViaParent()
+ * Varsayılan olarak, HttpClient'ı belirli bir enjektör içinde provideHttpClient kullanarak yapılandırdığınızda, bu yapılandırma ana enjektörde mevcut olabilecek HttpClient için herhangi bir yapılandırmayı geçersiz kılar.
+ * withRequestsMadeViaParent() eklediğinizde, HttpClient, bu düzeyde yapılandırılmış herhangi bir interceptor'dan geçtikten sonra, istekleri ana enjektördeki HttpClient instance'ına iletmek üzere yapılandırılır.
+ * İlgili request'i ana enjektörün interceptor'larından gönderirken, bir alt enjektöre interceptor'lar eklemek istediğinizde yararlıdır.
+ * 🔻 Mevcut enjektörün üstünde bir HttpClient örneği yapılandırmanız gerekir, aksi takdirde bu seçenek geçerli olmaz ve kullanmaya çalıştığınızda çalışma zamanı hatası alırsınız.
+ */
+
+/** 🔴 HttpClientModule-based configuration
+ * Eski versiyonlu ve bazı uygulamalar, NgModules'a dayalı eski API'yi kullanarak HttpClient'ı yapılandırabilir.
+ * HttpClient'ı kullanabilmeniz için Angular HttpClientModule'u içe aktarmanız gerekir. Çoğu uygulama bunu kök AppModule'da yapar.
+
+      🔵
+      import { HttpClientModule } from '@angular/common/http';
+
+      @NgModule({
+        imports: [
+          BrowserModule,
+          // import HttpClientModule after BrowserModule.
+          HttpClientModule,
+        ],
+        ...
+      })
+      export class AppModule {}
+
+ * Daha sonra HttpClient service class'ını, aşağıdaki ConfigService örneğinde gösterildiği gibi bir uygulama sınıfının bağımlılığı olarak ekleyebilirsiniz.
+ 
+      import { Injectable } from '@angular/core';
+      import { HttpClient } from '@angular/common/http';
+
+      @Injectable()
+      export class ConfigService {
+        constructor(private http: HttpClient) { }
+      }
+ */
+
 
 /** 🔴 Making HTTP requests
  * HttpClient, hem veri yüklemek hem de sunucuda mutasyonlar uygulamak amacıyla isteklerde bulunabilmek
@@ -207,4 +267,105 @@
         http.post<Config>('/api/config', newConfig).subscribe(config => {
           console.log('Updated config:', config);
         });
+ */
+
+
+/** 🔴 Interceptors
+ * HttpClient, interceptor olarak bilinen bir ara yazılım (middleware) türünü destekler.
+ * Interceptor'lar yeniden deneme, önbelleğe alma, günlük kaydı ve kimlik doğrulama gibi işlemleri bireysel request'lerden soyutlanmasına olanak sağlayan ara yazılımlardır.
+ * Interceptor'lar genellikle her bir request için çalıştırabileceğiniz fonksiyonlardır.
+ * Request ve response'ların içeriklerini ve genel akışını etkilemek için geniş yeteneklere sahiptirler.
+ * Bir interceptor zinciri kurabilirsiniz.
+ 
+ * HttpClient iki tür interceptor'ü destekler: functional ve DI-based.
+ * Önerimiz, özellikle karmaşık kurulumlarda daha öngörülebilir davranışlara sahip oldukları için functional interceptor'leri kullanmanızdır.
+
+ * Çeşitli yaygın desenleri uygulamak için interceptörleri kullanabilirsiniz:
+    . Üstel geri çekilmeyle başarısız istekleri yeniden deneme.
+    . Belirli bir API'ya giden isteklere authentication başlıkları ekleme. (with exponential backoff)
+    . Response'ları bir süre boyunca veya mutasyonlar tarafından geçersiz kılınana kadar önbelleğe alma.
+    . Response'ların ayrıştırılmasını özelleştirme.
+    . Sunucu yanıt sürelerini ölçme ve bunları kaydetme.
+    . Ağ işlemleri devam ederken 'loading spinner' gibi kullanıcı arayüzü öğelerini çalıştırma.
+    .  Belirli bir zaman dilimi içinde yapılan istekleri toplama ve toplu olarak gönderme.
+    . Yapılandırılabilir bir son tarih veya zaman aşımından sonra istekleri otomatik olarak başarısız kılma.
+    . Sunucuyu düzenli olarak yoklama ve sonuçları yenileme.
+
+  * 🔵 Defining an interceptor
+  * Bir interceptor'ın temel biçimi, giden HttpRequest'i alan bir fonksiyon ve interceptor zincirindeki bir sonraki işleme adımını temsil eden bir next fonksiyonudur.
+
+    export function loggingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
+      console.log(req.url);
+      return next(req);
+    }
+
+  * 🔵 Configuring interceptors
+  * Dependency injection yöntemiyle HttpClient'ı yapılandırırken kullanılacak interceptor kümesini withInterceptors() özelliğini kullanarak bildirirsiniz:
+  * Yapılandırdığınız interceptor'lar, sağlayıcılarda listelediğiniz sıraya göre birbirine zincirlenir.
+  * Aşağıdaki örnekte, loggingInterceptor isteği işler ve ardından cachingInterceptor'a iletir.
+
+    bootstrapApplication(AppComponent, {providers: [
+      provideHttpClient(
+        withInterceptors([loggingInterceptor, cachingInterceptor]),
+      )
+    ]});
+
+  * 🔵 Intercepting response events
+  * Bir interceptor, yanıta erişmek veya onu işlemek için 'next:' tarafından döndürülen HttpEvents'ın Observable akışını dönüştürebilir.
+  * Bu akış tüm response event'lerini içerdiğinden, son response nesnesini tanımlamak için her olayın .type'ını incelemek gerekebilir.
+
+    export function loggingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
+      return next(req).pipe(tap(event => {
+        if (event.type === HttpEventType.Response) {
+          console.log(req.url, 'returned a response with status', event.status);
+        }
+      }));
+    }
+
+  * 🔵 Modifying requests
+  * HttpRequest ve HttpResponse instance'larının çoğu yönü değiştirilemezdir ve interceptor'lar bunları doğrudan değiştiremez.
+  * Bunun yerine, interceptor'lar .clone() fonksiyonuyla bu nesneleri klonlayarak ve yeni instance'da hangi özelliklerin değiştirileceğini belirterek mutasyonlar uygular.
+  
+    const reqWithHeader = req.clone({
+      headers: req.headers.set('X-New-Header', 'new header value'),
+    });
+  
+  * 🔵 Dependency injection in interceptors
+  * Interceptor'lar, onları kaydeden injector'ın enjeksiyon bağlamında çalıştırılır ve bağımlılıkları almak için Angular'ın inject API'sini kullanabilir.
+  
+    export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn) {
+      // Inject the current `AuthService` and use it to get an authentication token:
+      const authToken = inject(AuthService).getAuthToken();
+      // Clone the request to add the authentication header.
+      const newReq = req.clone({
+        headers: req.headers.append('X-Authentication-Token', authToken),
+      });
+      return next(newReq);
+    }
+
+
+
+  * 🔵 Class-based Interceptors
+  * HTTP interceptor'larını fonksiyonlar olarak tanımlamanın yanı sıra (ki bu, bunu yapmanın modern ve önerilen yoludur), HTTP interceptor'larını class'lar aracılığıyla da tanımlayabilirsiniz.
+  
+    import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, } from '@angular/common/http';
+    import { Observable } from 'rxjs';
+  
+    @Injectable()
+    class LoggingInterceptor implements HttpInterceptor {
+      intercept(req: HttpRequest<unknown>, handler: HttpHandler): Observable<HttpEvent<any>> {
+        console.log('Request URL: ' + req.url);
+        return handler.handle(req);
+      }
+    }
+
+    providers: [
+      provideHttpClient(
+        withInterceptorsFromDi()
+      ),
+      { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true }
+    ]
+  * 
+  * 
+  * 
  */
