@@ -117,7 +117,7 @@
     . Kullanıcı, FormControl değerini güncelleyecek herhangi bir fonksiyonu çağırır.
     . FormControl instance'ı, yeni değeri valueChanges observable'ı aracılığıyla yayar.
     . valueChanges observable'ına abone olan herkes yeni değeri alır.
-    . Form input element'indeki control değeri erişimcisi (the control value accessor), ilgili elementi yeni değerle günceller.
+    . Form input element'indeki ControlValueAccessor, ilgili elementi yeni değerle günceller.
  */
 
 /** 🔵 Data flow in template-driven forms
@@ -126,10 +126,10 @@
  * 🎈 The view-to-model diagram
     . Kullanıcı input element'ine bir değer girer.
     . Ardından ilgili input element'i girilen en son değeri tutan bir 'input event' yayar.
-    . Ardından input element'ine eklenen kontrol değeri erişimcisi (the control value accessor), FormControl instance'ında setValue() fonksiyonunu tetikler.
+    . Ardından input element'ine eklenen ControlValueAccessor, FormControl instance'ında setValue() fonksiyonunu tetikler.
     . FormControl instance'ı, yeni değeri valueChanges observable'ı aracılığıyla yayar.
     . valueChanges observable'ına abone olan herkes yeni değeri alır.
-    . The control value accessor ayrıca bir ngModelChange event'i yayan NgModel.viewToModelUpdate() fonksiyonunu çağırır.
+    . ControlValueAccessor, ayrıca bir ngModelChange event'i yayan NgModel.viewToModelUpdate() fonksiyonunu çağırır.
     . İlgili input değeri için two-way data binding kullanıldığı için bileşendeki ilgili property ngModelChange event'i tarafından güncellenir.
 
  * 🎈 The model-to-view diagram
@@ -141,16 +141,29 @@
     . Ardından FormControl instance'ının değerini ayarlama görevi yürütülür.
     . FormControl instance'ı, valueChanges observable'ı aracılığıyla en son değeri yayar.
     . valueChanges observable'ına abone olan herkes yeni değeri alır.
-    . The control value accessor, view'daki form input element'ini en son değeriyle günceller.
+    . ControlValueAccessor, view'daki form input element'ini en son değeriyle günceller.
  */
 
 
 /** 🔴 Mutability of the data model
- *
- *
+ 
+ * 🟣 reactive forms
+ * İlgili data model'ini bir immutable data structure olarak 'pure' tutun.
+ * İlgili data modelinde her değişiklik tetiklendiğinde, FormControl instance'ı mevcut data modelini güncellemek yerine yeni bir data modeli döndürür.
+ * Bu, ControlValueAccessor'ın observable'ı aracılığıyla data modelindeki benzersiz değişiklikleri izleme olanağı sağlar.
+ * Değişiklik tespiti daha verimlidir çünkü yalnızca unique değişikliklerde güncelleme yapması gerekir.
+ * Veri güncellemeleri reactive kalıpları izlediğinden, verileri dönüştürmek için observable operator'leriyle bütünleştirebilirsiniz.
+ 
+ * 🔵 template-driven forms
+ * İlgili template'de değişiklikler yapıldıkça component'deki data modelini güncellemek için two-way data binding ile mutability'ye güvenin.
+ * Two-way data binding kullanıldığında ilgili data modelinde izlenecek unique değişiklikler olmadığından, change detection,
+ * ...güncellemelerin ne zaman gerekli olduğunu belirlemede daha az verimlidir.
+ 
+   . Reactive formlarda, FormControl instance'ı ControlValueAccessor'ün değeri güncellendiğinde her zaman yeni bir değer döndürür.
+   . Template-driven formlarda, ilgili property her zaman yeni değerine göre değiştirilir
  */
 
-/** 🔴
+/** 🔴 Form Validation
  *
  *
  */
