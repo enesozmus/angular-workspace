@@ -1,5 +1,5 @@
 /** 🔴 FormsModule
- * Formların yönetimini Angular'ın almasına olanak sağlar.
+ * Formların yönetimini Angular'ın almasını sağlar.
  * Template-driven formlar için gerekli provider'ları ve directive'leri export eder ve bunları bu modülü
  import eden NgModules tarafından içe aktarılmaya hazır hale getirir.
  */

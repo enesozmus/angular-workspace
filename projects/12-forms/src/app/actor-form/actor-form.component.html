@@ -1,6 +1,9 @@
 <!-- 🔴 Define a data model -->
 <!-- 🔴 Build an Angular form with a component and template -->
-<form>
+<!-- 🔴 Include required infrastructure such as the 'FormsModule' -->
+
+<!-- <form (ngSubmit)="onSubmit(actorForm)" #actorForm> -->
+<form (ngSubmit)="onSubmit(actorForm)" #actorForm="ngForm">
   <label for="name">Name</label>
   <input type="text" id="name" name="name" />
 
@@ -14,3 +17,21 @@
 
   <button type="submit" class="btn">New Actor</button>
 </form>
+
+<!-- 
+  🔵 Template Variables
+    . Template Variable'lar, şablonun bir bölümündeki verileri şablonun başka bir bölümünde kullanmanıza yardımcı olur.
+    . Şablonda, bir 'template variable' bildirebilmek için # (kare-hashtag-diyez) sembolünü kullanırsınız. (#phone #name #form)
+
+      <form (ngSubmit)="onSubmit(actorForm)" #actorForm>
+
+  🔵 Using 'NgForm' with template variables
+    . FormsModule'u import ettiğiniz anda, NgForm directive'i tüm <form> tag'lerinde varsayılan olarak etkin hale gelir.
+    . ngForm attribute değeri olmadan, actorForm'un referans değeri HTMLFormElement, <form> olur.
+    . ngForm attribute değeri ilgili formun Angular tarafından oluşturulan JavaScript nesnesine ulaşılabilmesine olanak sağlar.
+
+      <form (ngSubmit)="onSubmit(actorForm)" #actorForm="ngForm">
+
+    . ngForm bizi FormGroup class'ına götürür.
+    . 🔴 → notes → 2-) Fundamental & Concepts.ts → 3-) Template Driven Forms.ts
+ -->
