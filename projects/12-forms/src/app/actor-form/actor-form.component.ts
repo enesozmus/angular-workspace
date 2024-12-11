@@ -31,14 +31,19 @@ export class ActorFormComponent {
 
   @ViewChild('actorForm') myActorForm: NgForm | any;
   onSubmit() {
-    console.log('3 Submitted!');
-    console.log(this.myActorForm);
-    console.log(this.myActorForm.form);
-    console.log(this.myActorForm.form.controls);
-    console.log(this.myActorForm.form.controls.name);
-    console.log(this.myActorForm.form.controls.studio);
+    // if (this.myActorForm.form.invalid) {
+    //   return;
+    // }
+    if (this.myActorForm.form.valid) {
+      console.log('3 Submitted!');
+      console.log(this.myActorForm);
+      console.log(this.myActorForm.form);
+      console.log(this.myActorForm.form.controls);
+      console.log(this.myActorForm.form.controls.name);
+      console.log(this.myActorForm.form.controls.studio);
 
-    console.log(this.myActorForm.form.controls.name.value);
-    console.log(this.myActorForm.form.controls.studio.value);
+      console.log(this.myActorForm.form.controls.name.value);
+      console.log(this.myActorForm.form.controls.studio.value);
+    }
   }
 }

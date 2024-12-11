@@ -4,15 +4,28 @@
 
 <!-- <form (ngSubmit)="onSubmit(actorForm)" #actorForm> -->
 <!-- <form (ngSubmit)="onSubmit(actorForm)" #actorForm="ngForm"> -->
-  <form (ngSubmit)="onSubmit()" #actorForm="ngForm">
+<form (ngSubmit)="onSubmit()" #actorForm="ngForm">
   <label for="name">Name</label>
-  <input type="text" id="name" name="name" [(ngModel)]="model.name"/>
+  <input
+    type="text"
+    id="name"
+    name="name"
+    [(ngModel)]="model.name"
+    required
+    minlength="6"
+  />
 
   <label for="studio">Studio</label>
-  <input type="text" id="studio" name="studio" [(ngModel)]="model.studio"/>
+  <input
+    type="text"
+    id="studio"
+    name="studio"
+    [(ngModel)]="model.studio"
+    required
+  />
 
   <label for="skill">Skill</label>
-  <select id="skill" name="skill" [(ngModel)]="model.skill">
+  <select id="skill" name="skill" [(ngModel)]="model.skill" required>
     <option *ngFor="let skill of skills" [value]="skill">{{ skill }}</option>
   </select>
 
