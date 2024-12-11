@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
+import { Actor } from './actor.model';
 
 @Component({
   selector: 'app-actor-form',
@@ -11,6 +12,12 @@ import { FormsModule, NgForm } from '@angular/forms';
 })
 export class ActorFormComponent {
   skills = ['Method Acting', 'Singing', 'Dancing', 'Swordfighting'];
+
+  // Define a sample data model
+  model = new Actor(18, 'Tom Cruise', this.skills[3], 'CW Productions');
+  test() {
+    this.model.name = 'New Test Data';
+  }
 
   // onSubmit(form: HTMLFormElement) {
   //   console.log('1 Submitted!');

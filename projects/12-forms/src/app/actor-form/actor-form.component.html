@@ -6,18 +6,20 @@
 <!-- <form (ngSubmit)="onSubmit(actorForm)" #actorForm="ngForm"> -->
   <form (ngSubmit)="onSubmit()" #actorForm="ngForm">
   <label for="name">Name</label>
-  <input type="text" id="name" name="name" ngModel/>
+  <input type="text" id="name" name="name" [(ngModel)]="model.name"/>
 
   <label for="studio">Studio</label>
-  <input type="text" id="studio" name="studio" ngModel/>
+  <input type="text" id="studio" name="studio" [(ngModel)]="model.studio"/>
 
   <label for="skill">Skill</label>
-  <select id="skill" name="skill">
+  <select id="skill" name="skill" [(ngModel)]="model.skill">
     <option *ngFor="let skill of skills" [value]="skill">{{ skill }}</option>
   </select>
 
   <button type="submit" class="btn">New Actor</button>
 </form>
+
+<button (click)="test()" type="submit" class="btn">TEST</button>
 
 <!-- 
   🔵 Template Variables
