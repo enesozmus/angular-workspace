@@ -45,34 +45,13 @@
 * İlgili form submit edildiğinde yani kabaca butonuna tıklandığında oluşacak olayı (ngSubmit)="" yayar.
 * Yayılan bu olayı component class'ında onSubmit(){} fonksiyonuyla yakalayabilirsiniz.
 
+* 🔵 NgModel
+* Formun ötesinde ilgili kullanıcı girdilerine erişmek ve onları yönetmek için ngModel directive'i kullanılır.
+* İlgili kullanıcı girdileri ilgili HTML input elementine 'NgModel' directive'inin eklenmesiyle birlikte ngForm directive'i
+üzerinden form isimli FormGroup class'ı içerisinde FormControl tipindeki controls object'inde ulaşılabilir ve yönetilebilir hale gelirler.
 
-
-
-
-
-
- * 
- * 
- * 
- * 
- * 
- * 
- * Form'daki control elementleri input validation'ları olan data property'lerine bağldır.
- * Template-driven formlar, ilgili template'de değişiklikler yapıldıkça component'deki veri modelini güncellemek (ya da tersi) için two-way data binding kullanır.
- * Template-driven formlar, Angular template'inizde form-specific directive'ler kullanmanıza olanak tanır.
- * Template-driven formlar küçük veya daha basit formlar için harika bir seçimdir.
- * - Reactive formlar ise daha ölçeklenebilir ve karmaşık formlar için uygundur.
- * - Reactive formlar, form oluşturmak için model odaklı bir yaklaşım sağlar.
-
-   . Input-control değerlerini okumak ve yazmak için two-way data binding'ler oluşturmak üzere ngModel'i kullanın
-   . Control'lerin durumunu izleyen özel CSS class'ları kullanarak görsel geri bildirimler sağlayın
-   . Doğrulama hatalarını kullanıcılara gösterin ve form durumuna göre form denetimlerinden koşullu olarak girdiye izin verin
-   . Template reference variable'ları kullanarak HTML elemetleri arasında bilgi paylaşın
-
- 
-   . NgModel	   → Ekli form elementindeki değer değişikliklerini veri modelindeki değişikliklerle uzlaştırır ve kullanıcı girdisine giriş doğrulaması ve hata işleme ile yanıt vermenizi sağlar.
-   . NgForm		   → En üst düzey bir FormGroup instance'ı oluşturur ve bunu toplanmış form değerini ve doğrulama durumunu izlemek için bir <form> element'ine bağlar.
-                  FormsModule'u içe aktardığınız anda, bu directive varsayılan olarak tüm <form> etiketlerinde etkin hale gelir.
-                  Özel bir selector eklemenize gerek yoktur.
-   . NgModelGroup	→ Bir FormGroup instance'ını oluşturur ve bir DOM element'ine bağlar.
- */
+* 🔵 [(ngModel)]=""
+* İlgili syntax ek olarak two-way data binding mekanizması kurar.
+* Böylece çift-taraflı olarak kullanıcı girdileri ilgili veri modeliyle senkronize tutulur.
+* 
+*/

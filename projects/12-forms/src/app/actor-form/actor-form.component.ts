@@ -26,5 +26,12 @@ export class ActorFormComponent {
   onSubmit() {
     console.log('3 Submitted!');
     console.log(this.myActorForm);
+    console.log(this.myActorForm.form);
+    console.log(this.myActorForm.form.controls);
+    console.log(this.myActorForm.form.controls.name);
+    console.log(this.myActorForm.form.controls.studio);
+
+    console.log(this.myActorForm.form.controls.name.value);
+    console.log(this.myActorForm.form.controls.studio.value);
   }
 }

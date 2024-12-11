@@ -6,10 +6,10 @@
 <!-- <form (ngSubmit)="onSubmit(actorForm)" #actorForm="ngForm"> -->
   <form (ngSubmit)="onSubmit()" #actorForm="ngForm">
   <label for="name">Name</label>
-  <input type="text" id="name" name="name" />
+  <input type="text" id="name" name="name" ngModel/>
 
   <label for="studio">Studio</label>
-  <input type="text" id="studio" name="studio" />
+  <input type="text" id="studio" name="studio" ngModel/>
 
   <label for="skill">Skill</label>
   <select id="skill" name="skill">
