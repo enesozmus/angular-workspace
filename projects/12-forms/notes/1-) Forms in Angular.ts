@@ -10,6 +10,10 @@
 /** 🔴 Choosing an approach → reactive & template-driven
  * Reactive formlar ve template-driven formlar form verilerini farklı şekilde işler ve yönetir.
  * Her yaklaşım farklı avantajlar sunar.
+ 
+ * 🔵 Template-driven formlarda, formun mantığı şablona yerleştirilir.
+ Herhangi bir JavaScript kodu yazmadan kolayca karmaşık görünümlü formlar oluşturmamızı sağlar.
+ * 🟣 Reactive formlarda, formun mantığı developer tarafından component'de bir nesne olarak tanımlanır.
  */
 
 
