@@ -163,7 +163,36 @@
    . Template-driven formlarda, ilgili property her zaman yeni değerine göre değiştirilir
  */
 
+
 /** 🔴 Form Validation
- *
- *
+ * Validation , herhangi bir form setini yönetmenin ayrılmaz bir parçasıdır.
+ * İster zorunlu field'ları kontrol ediyor olun, ister mevcut bir kullanıcı adı için harici bir API'ya sorgu gönderiyor olun,
+ * ...Angular yerleşik validator seti ve custom validator oluşturma olanağı sağlar.
+ 
+   . Reactive formlar için fonksiyonlar şeklinde custom validator'lar tanımlanır.
+   . Template-driven formlar için ise validation fonksiyonlarını saran template directive'leri tanımlanır.
+ */
+
+
+/** 🔴 Building a template-driven form
+ * Form'daki control elementleri input validation'ları olan data property'lerine bağldır.
+ * Template-driven formlar, ilgili template'de değişiklikler yapıldıkça component'deki veri modelini güncellemek (ya da tersi) için two-way data binding kullanır.
+ * Template-driven formlar, Angular template'inizde form-specific directive'ler kullanmanıza olanak tanır.
+ * Template-driven formlar küçük veya daha basit formlar için harika bir seçimdir.
+ * - Reactive formlar ise daha ölçeklenebilir ve karmaşık formlar için uygundur.
+ * - Reactive formlar, form oluşturmak için model odaklı bir yaklaşım sağlar.
+
+   . Bir componnet ve template'i ile bir Angular formu oluşturun
+   . Input-control değerlerini okumak ve yazmak için two-way data binding'ler oluşturmak üzere ngModel'i kullanın
+   . Control'lerin durumunu izleyen özel CSS class'ları kullanarak görsel geri bildirimler sağlayın
+   . Doğrulama hatalarını kullanıcılara gösterin ve form durumuna göre form denetimlerinden koşullu olarak girdiye izin verin
+   . Template reference variable'ları kullanarak HTML elemetleri arasında bilgi paylaşın
+ 
+ * Template-driven formlar, FormsModule'de tanımlanan directive'lere dayanır.
+ 
+   . NgModel	   → Ekli form elementindeki değer değişikliklerini veri modelindeki değişikliklerle uzlaştırır ve kullanıcı girdisine giriş doğrulaması ve hata işleme ile yanıt vermenizi sağlar.
+   . NgForm		   → En üst düzey bir FormGroup instance'ı oluşturur ve bunu toplanmış form değerini ve doğrulama durumunu izlemek için bir <form> element'ine bağlar.
+                  FormsModule'u içe aktardığınız anda, bu directive varsayılan olarak tüm <form> etiketlerinde etkin hale gelir.
+                  Özel bir selector eklemenize gerek yoktur.
+   . NgModelGroup	→ Bir FormGroup instance'ını oluşturur ve bir DOM element'ine bağlar.
  */

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { LoginComponent } from './auth/login/login.component';
+import { ActorFormComponent } from './actor-form/actor-form.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [LoginComponent],
+  imports: [ActorFormComponent],
   templateUrl: './app.component.html',
 })
 export class AppComponent {}
