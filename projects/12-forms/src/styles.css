@@ -149,7 +149,7 @@ fieldset {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  color: #ffca99;
+  color: red;
   height: 0.5rem;
   padding: 0.25rem 0 0 0;
   height: 1.5rem;

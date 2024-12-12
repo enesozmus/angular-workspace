@@ -11,6 +11,7 @@
     id="name"
     name="name"
     [(ngModel)]="model.name"
+    #nameCtrl="ngModel"
     required
     minlength="6"
   />
@@ -21,11 +22,19 @@
     id="studio"
     name="studio"
     [(ngModel)]="model.studio"
+    #studioCtrl="ngModel"
     required
+    minlength="4"
   />
 
   <label for="skill">Skill</label>
-  <select id="skill" name="skill" [(ngModel)]="model.skill" required>
+  <select
+    id="skill"
+    name="skill"
+    [(ngModel)]="model.skill"
+    #skillCtrl="ngModel"
+    required
+  >
     <option *ngFor="let skill of skills" [value]="skill">{{ skill }}</option>
   </select>
 
@@ -33,6 +42,18 @@
 </form>
 
 <button (click)="test()" type="submit" class="btn">TEST</button>
+
+<!-- @if (actorForm.form.invalid) {}
+@if (actorForm.form.controls['name']) {} -->
+@if (nameCtrl.touched && nameCtrl.dirty && nameCtrl.invalid) {
+  <p class="control-error">Invalid (name) values detected. Please check your input.</p>
+}
+@if (studioCtrl.touched && studioCtrl.dirty && studioCtrl.invalid) {
+  <p class="control-error">Invalid (studio) values detected. Please check your input.</p>
+}
+@if (skillCtrl.touched && skillCtrl.dirty && skillCtrl.invalid) {
+  <p class="control-error">Invalid (skill) values detected. Please check your input.</p>
+}
 
 <!-- 
   🔵 Template Variables
@@ -50,4 +71,8 @@
 
     . ngForm bizi FormGroup class'ına götürür.
     . 🔴 → notes → 2-) Fundamental & Concepts.ts → 3-) Template Driven Forms.ts
+
+
+    #nameCtrl           → DOM elementine erişim sağlar
+    #nameCtrl="ngModel" → Angular tarafından oluşturulan control nesnesine erişim sağlar
  -->
