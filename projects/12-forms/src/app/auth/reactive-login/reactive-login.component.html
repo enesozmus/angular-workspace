@@ -1,15 +1,15 @@
-<form>
+<form [formGroup]="myReactiveForm">
   <h2>Reactive Login</h2>
 
   <div class="control-row">
     <div class="control no-margin">
       <label for="rEmail">Email</label>
-      <input id="rEmail" type="rEmail" />
+      <input id="rEmail" type="rEmail" [formControl]="myReactiveForm.controls.email" />
     </div>
 
     <div class="control no-margin">
       <label for="rPassword">Password</label>
-      <input id="rPassword" type="rPassword" />
+      <input id="rPassword" type="rPassword" formControlName="password" />
     </div>
 
     <button class="button">Login</button>

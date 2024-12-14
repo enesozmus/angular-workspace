@@ -9,7 +9,7 @@
  
  *
  * 🔵 To use reactive form controls, import 'ReactiveFormsModule'.
- * 🔵 Generate a new component with a FormControl('').
+ * 🔵 Generate a new component with a FormGroup({}) or FormControl('').
  * 🔵 Register the control in the template
  
     import {Component} from '@angular/core';
@@ -32,6 +32,9 @@
 
     <label for="name">Name: </label>
     <input id="name" type="text" [formControl]="name">
+
+    <form [formGroup]="myReactiveForm">
+    </form>
 
  * 
  * 
