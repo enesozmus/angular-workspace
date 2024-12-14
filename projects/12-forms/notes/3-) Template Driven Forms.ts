@@ -53,5 +53,14 @@
 * 🔵 [(ngModel)]=""
 * İlgili syntax ek olarak two-way data binding mekanizması kurar.
 * Böylece çift-taraflı olarak kullanıcı girdileri ilgili veri modeliyle senkronize tutulur.
-* 
+
+🔵
+#nameCtrl           → DOM elementine erişim sağlar
+#nameCtrl="ngModel" → Angular tarafından oluşturulan control nesnesine erişim sağlar
+
+🔵
+this.form.valueChanges?
+this.form().valueChanges?
+    → Control'ün değeri her değiştiğinde kullanıcı arayüzünde veya programatik olarak yayımlanan
+    control için değer değişikliklerinin çoklu yayın observable'ını döndürür.
 */

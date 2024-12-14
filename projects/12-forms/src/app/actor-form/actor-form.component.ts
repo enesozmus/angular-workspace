@@ -44,6 +44,8 @@ export class ActorFormComponent {
 
       console.log(this.myActorForm.form.controls.name.value);
       console.log(this.myActorForm.form.controls.studio.value);
+
+      this.myActorForm.reset();
     }
   }
 }
