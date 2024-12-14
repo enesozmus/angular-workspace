@@ -16,6 +16,10 @@ export class ReactiveLoginComponent {
   });
 
   onSubmit() {
-    // this.myReactiveForm.value.email
+    console.log(this.myReactiveForm);
+    
+    const enteredEmail = this.myReactiveForm.value.email;
+    const enteredPassword = this.myReactiveForm.value.password;
+    console.log(enteredEmail, enteredPassword);
   }
 }

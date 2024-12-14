@@ -28,12 +28,26 @@
         doğrulamak için anında erişim elde edersiniz.
         * Component class'ınızda bu control'ü oluşturduktan sonra, bunu şablondaki bir form control element'iyle ilişkilendirmelisiniz
         ...
+        ...
+        myReactiveForm = new FormGroup({
+            email: new FormControl(''),
+            password: new FormControl(''),
+        });
+        ...
+        ...
+        onSubmit() {
+            console.log(this.myReactiveForm);
+
+            const enteredEmail = this.myReactiveForm.value.email;
+            const enteredPassword = this.myReactiveForm.value.password;
+            console.log(enteredEmail, enteredPassword);
+        }
     }
 
     <label for="name">Name: </label>
     <input id="name" type="text" [formControl]="name">
 
-    <form [formGroup]="myReactiveForm">
+    <form [formGroup]="myReactiveForm" (ngSubmit)="onSubmit()">
     </form>
 
  * 
