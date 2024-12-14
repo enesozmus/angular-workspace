@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-reactive-login',
@@ -10,14 +10,38 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 })
 export class ReactiveLoginComponent {
   // myReactiveForm = new FormGroup({});
+  // myReactiveForm = new FormGroup({
+  //   email: new FormControl(''),
+  //   password: new FormControl(''),
+  // });
   myReactiveForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl(''),
+    email: new FormControl('', {
+      validators: [Validators.email, Validators.required],
+    }),
+    password: new FormControl('', {
+      validators: [Validators.required, Validators.minLength(6)],
+    }),
   });
+
+  get emailIsInvalid() {
+    return (
+      this.myReactiveForm.controls.email.touched &&
+      this.myReactiveForm.controls.email.dirty &&
+      this.myReactiveForm.controls.email.invalid
+    );
+  }
+
+  get passwordIsInvalid() {
+    return (
+      this.myReactiveForm.controls.password.touched &&
+      this.myReactiveForm.controls.password.dirty &&
+      this.myReactiveForm.controls.password.invalid
+    );
+  }
 
   onSubmit() {
     console.log(this.myReactiveForm);
-    
+
     const enteredEmail = this.myReactiveForm.value.email;
     const enteredPassword = this.myReactiveForm.value.password;
     console.log(enteredEmail, enteredPassword);
