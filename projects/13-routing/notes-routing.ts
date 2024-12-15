@@ -59,3 +59,11 @@
             <!-- The routed views render in the <router-outlet>-->
             <router-outlet></router-outlet>
  */
+
+/** 🔴 Route Order
+ * Rotaların sırası önemlidir çünkü Router rotaları eşleştirirken "first-match wins" stratejisini kullanır.
+ * Bu nedenle daha spesifik rotalar daha az spesifik rotalara nazaran listenin daha yukarısına yerleştirilmelidir.
+ * Önce statik bir yola sahip rotaları listeleyin, ardından varsayılan rotayla eşleşen boş bir yol rotası ekleyin.
+ * Joker rota en son gelir!
+ * Temel bir kural olarak, her zaman en spesifikten en az spesifike doğru sıralamayı deneyin.
+ */
