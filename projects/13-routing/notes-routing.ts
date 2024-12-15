@@ -121,3 +121,17 @@
     ['/team', teamId, 'user', userName, {details: true}]
         /team/11/user/bob;details=true
  */
+
+/** 🔴 RouterLinkActive (directive)
+ * Bir elementin bağlantı yolunun şu anda etkin olup olmadığını izler ve bağlantılı yol etkin olduğunda 
+ ilgili elemente eklenecek bir veya daha fazla CSS sınıfı belirtmenize olanak tanır.
+
+    routerLink="/tasks" routerLinkActive="selected"
+    routerLink="/user/bob" routerLinkActive="active-link"
+    routerLink="/user/bob" routerLinkActive="class1 class2"
+    routerLink="/user/bob" [routerLinkActive]="['class1', 'class2']"
+    routerLink="/user/bob" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"
+
+    [routerLink]="['/home']" [routerLinkActive]="['is-active']"
+    [routerLink]="['/home']" [routerLinkActive]="'is-active'"
+ */
