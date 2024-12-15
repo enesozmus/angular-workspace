@@ -138,3 +138,38 @@
     { path: 'users/:userId', component: UserTasksComponent, }
         [routerLink]="['/users', user().id]" routerLinkActive="selected"
  */
+
+/** 🔴 Getting route information
+ * Genellikle, bir kullanıcı uygulamanızda gezinirken, bir component'ten diğerine bilgi aktarmak istersiniz.
+ * Bu tür bilgileri uygulama component'lerinize geçirebilmek için bir rota kullanabilirsiniz.
+ * Bunu yapabilmek için, provideRouter ile withComponentInputBinding()'i ya da 
+ RouterModule.forRoot'un bindToComponentInputs'unu kullanabilirsiniz.
+
+ * Angular 16'nın yayınlanmasıyla birlikte, developer'lar geçerli rota hakkında bilgi edinme konusunda daha basit bir yaklaşıma sahip oldu.
+ * Bu yeni özellik, @Input aracılığıyla geçerli rota parametrelerine erişmenizi sağlayarak, gereken kalıp kod miktarını önemli ölçüde azaltır.
+ * Daha önce, geçerli rota hakkında bilgi edinmek için, ilgili component'e ActivatedRoute'u eklemeniz ve rota parametrelerini almak için snapshot property'sini kullanmanız gerekiyordu.
+ * Yeni yaklaşım bu süreci önemli ölçüde basitleştirir.
+ * Şimdi yapmanız gereken tek şey, parametrenin adıyla bir input property'si bildirmektir:
+
+    @Input() id!: string;
+    { path: ":id", component: ProfileComponent }
+    providers: [provideRouter(routes, withComponentInputBinding())]
+
+    🎈 module-based
+    @NgModule({
+        declarations: [AppComponent],
+        bootstrap: [AppComponent],
+        imports: [BrowserModule, RouterModule.forRoot(routes, {
+        bindToComponentInputs: true
+        })]
+    })
+
+ * 🔵 withComponentInputBinding()
+ * Router durumundan gelen bilgilerin, Route yapılandırmalarındaki component input'larına doğrudan bağlanmasını sağlar.
+    query parameters
+    path and matrix parameters
+    static route data
+    data from resolvers
+
+
+ */
