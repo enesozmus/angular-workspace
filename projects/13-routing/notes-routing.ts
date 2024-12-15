@@ -67,3 +67,57 @@
  * Joker rota en son gelir!
  * Temel bir kural olarak, her zaman en spesifikten en az spesifike doğru sıralamayı deneyin.
  */
+
+/** 🔴 RouterLink (directive)
+ * Angular'da RouterLink, farklı bir rotaya bildirimsel olarak gitmek için bir directive'dir.
+ * İlgili template'deki bir elemente uygulandığında, o elementi tanımlanan rotaya bir gezinme başlatan 
+ bir bağlantı haline getirir.
+ * Bir bağlantıda absolute veya relative path'ler kullanabilir, sorgu parametreleri ayarlayabilir,
+ parametrelerin nasıl işleneceğini kontrol edebilir ve gezinme durumlarının geçmişini tutabilirsiniz.
+
+    🔵
+    /               → router, rotayı uygulamanın kökünden arar.
+    ./              → router, aktif rotanın alt segmentlerine bakar.
+    ../             → router, rota ağacında bir seviye yukarı çıkar.
+
+    🔵
+    href="", sayfalarda gezinmek için HTML tarafından sağlanan ve tıklandığında sayfayı yeniden yükleyen temel attribute'tür.
+    routerLink="" ise 'sayfayı yeniden yüklemeden' farklı component'lere gitmek için Angular tarafından sağlanan directive'dir.
+    İkisi arasındaki en büyük fark, href'in geçerli sayfanın durumunu öldürmesi, routerLink'in ise sayfanın durumunu kaybetmemesidir.
+ 
+    🔵
+    Bunu tüm directive'lerde görebilirsiniz:
+        Köşeli parantez[] kullandığınızda, bindable property (a variable) geçirdiğiniz anlamına gelir.
+        [routerLink]="routerLinkVariable"
+        public routerLinkVariable = "/home";
+        updateRouterLinkVariable(){ this.routerLinkVariable = '/about'; }
+    Köşeli parantezleri[] routerLink için kullanmanın diğer bir sebebi de gezindiğiniz bağlantıya dinamik sorgu parametreleri geçirebilmenizdir:
+        [routerLink]="[routerLinkVariable]"[queryParams]="{unit: dynamicQueryParameter}"
+        private dynamicQueryParameter = '129'; public routerLinkVariable = "/home"; 
+
+    🔵
+    routerLink="/users"
+        <your-domain>/users
+
+    routerLink="/users/bob
+        <your-domain>/users/bob
+
+    [routerLink]="['/', 'users', 'bob']"
+        <your-domain>/users/bob
+
+    [routerLink]="['/', 'users', {details: true}, 'bob']"
+    [routerLink]="['/', 'users', {display: 'verbose'}, 'bob']"
+        <your-domain>/users;display=verbose/bob
+
+    [routerLink]="['/user/bob']" [queryParams]="{debug: true}" fragment="education"
+        /user/bob?debug=true#education
+
+    [routerLink]="['/', 'users', { outlets: { side: ['bob'] } }]"
+    [routerLink]="['/', 'users', { outlets: { side: ['bob'], footer: ['sharks'] } }]"
+
+    [{ path: 'user/:name', component: UserCmp }]    
+        <a routerLink="/user/bob">link to user component</a>
+
+    ['/team', teamId, 'user', userName, {details: true}]
+        /team/11/user/bob;details=true
+ */
