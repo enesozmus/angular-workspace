@@ -134,4 +134,7 @@
 
     [routerLink]="['/home']" [routerLinkActive]="['is-active']"
     [routerLink]="['/home']" [routerLinkActive]="'is-active'"
+
+    { path: 'users/:userId', component: UserTasksComponent, }
+        [routerLink]="['/users', user().id]" routerLinkActive="selected"
  */
