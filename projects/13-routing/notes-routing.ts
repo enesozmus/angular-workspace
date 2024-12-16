@@ -202,3 +202,56 @@
      },
     ];
  */
+
+/** 🔴 Absolute and Relative Route Paths
+ * Angular geliştirmede, rotalar arasında gezinmeyi yönetmek temel bir beceridir.
+ * Geliştiricilerin sıklıkla karşılaştığı iki kritik kavram relative ve absolute path'lerdir.
+ * Bu path'ler bir uygulamanın farklı bölümlerinin nasıl birbirine bağlandığını ve gezindiğini belirler.
+ * Bir Angular uygulamasında rotalar genellikle çeşitli component'lerle tanımlanır.
+ 
+    <header>
+        <a routerLink="home">Home</a>
+        <a routerLink="about">About</a>
+        <a routerLink="contact">Contact</a>
+        <a routerLink="courses">Courses</a>
+    </header>
+ 
+ * 🔵 Absolute Paths
+ * Angular'daki absolute path'ler, yoldan önce önde gelen eğik çizgi (/) kullanılarak tanımlanır.
+ * Bu gösterim, Angular'a path'in absolute olduğunu, yani uygulamanın kök URL'ine doğrudan ekleneceğini söyler.
+	
+    <a routerLink="/about">About</a>
+	<your-domain>/about
+	localhost:4200/about
+
+ * 🔵 Relative Paths
+ * Relative path'ler geçerli URL segmentine bağıntılı path'ler tanımlamanıza olanak tanır.
+ * Relative path'ler eğik çizgi (/) kullanmazlar.
+ * İçinde bulunulan şu andaki mevcut-etkin-aktif rotaya eklenirler ve nihai URL'leri, uygulama içinde tıklandığı yere bağlıdır.
+ * İlgili linkin 'about' sayfasında olduğu varsayarsak, ilgili linke tıkladığımızda bizi localhost:4200/about/home adresine yönlendirir.
+
+	<a routerLink="home">Home</a>
+	localhost:4200/about/home
+
+ * Home component'inden 'kurslar' sayfasına giden bir butonumuz olduğunu varsayalım.
+ * Mevcut-etkin rotamız → localhost:4200/home
+ * Gidilecek rotayı hem absolute hem de relative bir path olarak tanımlayabiliriz.
+ 
+ * → absolute
+ 
+    <button routerLink="/courses">Go to Courses Page</button>
+    localhost:4200/courses
+
+* → relative
+
+    <button routerLink="courses">Go to Courses Page</button>
+    localhost:4200/home/courses
+
+ * 🔵 Special Notations
+ * Nokta-eğik çizgi (./) relative yolu belirtir.
+ * Çift nokta-eğik çizgi (../), rota hiyerarşisinde bir seviye yukarı çıkmayı ifade eder.
+ 
+    <a routerLink="../courses">Courses</a>
+    If the current route is 'localhost:4200/home/about', this will change the URL to 'localhost:4200/courses' by removing
+    one level (about) and appending courses.
+ */
