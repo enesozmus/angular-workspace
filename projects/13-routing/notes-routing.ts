@@ -260,3 +260,22 @@
     If the current route is 'localhost:4200/home/about', this will change the URL to 'localhost:4200/courses' by removing
     one level (about) and appending courses.
  */
+
+/** 🔴 Programmatic Navigation | Router
+ * Router → View'lar arasında navigation ve URL düzenleme yetenekleri sağlayan bir service.
+ * Angular'ın Router class'ında programatik navigation sağlayan iki fonksiyon mevcuttur.
+ 
+    navigate(commands: any[], extras?: NavigationExtras): Promise<boolean>; 
+    navigateByUrl(url: string | UrlTree, extras?: NavigationBehaviorOptions): Promise<boolean>;
+
+
+    this.router.navigate(['/users', this.userId(), 'tasks'], {
+      replaceUrl: true,
+    });
+
+    router.navigate(['team', 33, 'user', 11], {relativeTo: route});
+    router.navigate(['team', 33, 'user', 11], {relativeTo: route, skipLocationChange: true});
+
+    router.navigateByUrl("/team/33/user/11");
+    router.navigateByUrl("/team/33/user/11", { skipLocationChange: true });
+ */
