@@ -60,6 +60,25 @@
             <router-outlet></router-outlet>
  */
 
+/** 🔴 Route
+ * Tek bir rotayı tanımlayan bir yapılandırma nesnesi.
+ * Tek tek bir routes[] isimli array'de tanımlanırlar.
+ * Router, bu nesnede tanımlanan yapılandırma seçeneklerini kullanarak, belirli bir URL'in
+ bölümlerini her rotaya göre eşleştirmeye çalışır.
+
+    interface Route {
+        title?: string | Type<Resolve<string>> | ResolveFn<string> | undefined;
+        path?: string | undefined;
+        pathMatch?: "prefix" | "full" | undefined;
+        component?: Type<any> | undefined;
+        redirectTo?: string | RedirectFunction | undefined;
+        children?: Routes | undefined;
+        ...
+        ...
+        ...
+    }
+ */
+
 /** 🔴 Route Order
  * Rotaların sırası önemlidir çünkü Router rotaları eşleştirirken "first-match wins" stratejisini kullanır.
  * Bu nedenle daha spesifik rotalar daha az spesifik rotalara nazaran listenin daha yukarısına yerleştirilmelidir.
@@ -292,4 +311,169 @@
 
     router.navigateByUrl("/team/33/user/11");
     router.navigateByUrl("/team/33/user/11", { skipLocationChange: true });
+ */
+
+/** 🔴 pathMatch
+ * * /users/james/articles?from=134#section
+ * Öncelikle sorgu parametrelerinin (?from=134) ve fragment'ların (#section) path-matching'de
+ herhangi bir rol oynamadığını belirtelim. Sadece temel URL (/users/james/articles) önemlidir.
+ * Angular temel URL'i segmentlere ayırır. (users, james ve articles)
+ * Router yapılandırması, tek bir kök düğümü (root node) olan bir ağaç yapısıdır. (a tree structure)
+ * Her Route nesnesi, children düğümlere sahip olabilen bir düğümdür; bu children düğümler de başka
+ children düğümlere sahip olabilir veya leaf düğümler olabilir.
+ * Router'ın amacı, kök düğümden başlayarak URL'in tüm (!!!) segmentleriyle tam olarak eşleşen bir rota
+ yapılandırma dalı bulmaktır. Bu çok önemlidir!
+ * Angular, tüm URL ile eşleşebilecek bir route configuration branch bulamazsa - ne daha fazla ne de daha az -
+ hiçbir şey oluşturmayacaktır.
+ * Hedef URL'iniz /a/b/c ise Router yalnızca /a/b veya /a/b/c/d ile eşleşebiliyorsa, o zaman eşleşme olmaz ve
+ uygulama hiçbir şey oluşturmaz.
+ * Bu varsayılan davranıştır.
+
+ * * pathMatch
+    → path-matching stratejisi, 'prefix' veya 'full' olabilir. 
+    → Varsayılan 'prefix'tir.
+    → Varsayılan olarak, Router, URL elementlerini soldan kontrol ederek URL'in belirli bir yolla eşleşip
+    eşleşmediğini kontrol eder ve bir yapılandırma eşleşmesi olduğunda durur.
+        → 🔵 'prefix' stratejisi, Router'ın tüm yapılandırma ağacı üzerinde yineleme yapması ve URL tamamen eşleşene kadar
+        onu hedef URL segmentine göre segment segment eşleştirmeye çalışması anlamına gelir.
+        → 🔵 'full' stratejisi, ilgili route nesnesine ait children: [] Routes nesnesinin görmezden gelinmesini sağlar.
+        Eğer bütün segmentleri kapsayan direkt tam bir uyum yoksa ayrıca gidip child rotalarına bakmaz. 
+        (Ignore my children and only match me.)
+            - Note: redirectTo'lu rotalar, herhangi birinin pathMatch: full kullanmak isteyeceği tek yer olurdu.
+            - Note: An empty path (path: '') will match any segment, so not only /, but also /welcome.
+            - Note: path: '**', pathMatch: 'full' olsun veya olmasın kesinlikle her şeyle eşleşecektir.
+            - Note: Empty path (path: '') rotalarını yönlendirirken 'full' stratejisi kullanmak önemlidir.
+
+            /users/james/articles
+                    → 🔵 'prefix' → bir path: 'users' bulursa, james ve articles'ı eşleştirebilmek için child rotalarına girer ve bakar.
+                    → 🔵 'full'   → bir path: 'users' bulursa, users !== /users/james/articles eşitliği olmadığı için
+                    child rotalar da zaten es geçileceği için kod bu satırı atlar.
+ */
+
+/** 🔴 Setting up redirects
+ * 'Nihayetinde bir URL döndüren redirectTo property'sine sahip herhangi bir rota, varsayılan davranışa göre
+ hedef URL ile eşleştirilecektir. Buradaki tek fark, yönlendirmenin bir segment eşleştiği anda uygulanmasıdır.
+ * Bir yönlendirme rotası varsayılan olarak 'prefix' eşleşme-stratejisini kullanıyorsa, kısmi bir eşleşmenin
+ bir yönlendirmeye neden olmak için yeterli olduğu anlamına gelir.
+
+ * * /users/james/articles
+
+    🔵
+    const routes: Routes = [
+        {
+            path: 'not-found',
+            component: NotFoundComponent,
+        },
+        {
+            path: 'users',
+            redirectTo: 'not-found',
+        },
+        {
+            path: 'users/:userID',
+            children: [
+            {
+                path: 'comments',
+                component: UserCommentsComponent,
+            },
+            {
+                path: 'articles',
+                component: UserArticlesComponent,
+            },
+            ],
+        },
+    ];
+
+    1. 'not-found' !== 'users' - skip it. ❌
+    2. 'users' === 'users' - we have a match.
+       This match has a redirectTo: 'not-found', which is applied immediately.
+       The target URL changes to not-found.
+       The router begins matching again and finds a match for not-found right away.
+       The application renders NotFoundComponent.
+
+    🔵
+    const routes: Routes = [
+        {
+            path: 'not-found',
+            component: NotFoundComponent,
+        },
+        {
+            path: 'users',
+            pathMatch: 'full',
+            redirectTo: 'not-found',
+        },
+        {
+            path: 'users/:userID',
+            children: [
+            {
+                path: 'comments',
+                component: UserCommentsComponent,
+            },
+            {
+                path: 'articles',
+                component: UserArticlesComponent,
+            },
+            ],
+        },
+    ];
+
+    1. 'not-found' !== 'users' - skip it. ❌
+    2. 'users' === 'users' good but no ❌
+        users would match the first segment of the URL, but the route configuration requires a 'full' match, thus skip it.
+    3. 'users' === 'users' good and 
+       'users/:userID' === 'users/james' ✅
+       'users/:userID' matches users/james. 'articles' is still not matched but this route has children[].
+       We find a match for 'articles' in the children[].
+       The whole URL is now matched and the application renders UserArticlesComponent.
+
+    🔵
+    const routes: Routes = [
+       { path: 'welcome', component: WelcomeComponent },
+       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+        or
+       { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
+       { path: '**', component: NotFoundComponent }
+    ];
+    
+    Uygulama localhost:4200'de ayağa kalktığında varsayılan sayfa 'welcome' olacaktır.
+    Çünkü ilk eşleşme empty path (path: '') ile olacaktır o da 'welcome' yönlendirmesi yapacaktır.
+
+    → pathMatch:'full' → Bu durumda açılan ilk sayfa WelcomeComponent olacaktır.
+        /asdafa durumunda ise NotFoundComponent olacaktır.
+    → pathMatch:'prefix' → Bu durumda artık her URL tanımlanan path:'' ile eşleşeceğinden bu asla joker rotaya ulaşmayacaktır.
+
+ * 🎈
+ * Kullanıcıları rollerine, üyelik veya abonelik durumlarına göre uygulamanızın farklı bölümlerine yönlendirmek isteyebilirsiniz.
+ * Bir redirect ayarlamak için, yönlendirme yapmak istediğiniz path ile bir rotayı, yönlendirme yapmak
+ istediğiniz component'i ve router'a URL'i nasıl eşleştireceğini söyleyen bir pathMatch değerini içeren
+ bir rota yapılandırın.
+
+    { path: 'users', redirectTo: 'not-found' },
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: 'users', pathMatch: 'full', redirectTo: 'not-found' },
+
+ * 🔴 redirectTo 
+        → Path eşleştiğinde yönlendirilecek (redirect) bir URL döndüren bir URL veya fonksiyon.
+        → URL eğik çizgiyle (/) başlıyorsa veya işlev bir UrlTree döndürüyorsa 'absolute',
+        aksi takdirde path URL'ine bağıntılı. (relative)    
+
+ * 🎈 Bazen bir redirect basit, statik bir redirect olmaz.
+ * RedirectTo property'si ayrıca bir string veya UrlTree döndüren daha karmaşık mantığa sahip bir fonksiyon olabilir.
+
+    const routes: Routes = [
+        { path: "first-component", component: FirstComponent },
+        {
+            path: "old-user-page",
+            redirectTo: ({ queryParams }) => {
+            const errorHandler = inject(ErrorHandler);
+            const userIdParam = queryParams['userId'];
+            if (userIdParam !== undefined) {
+                return `/user/${userIdParam}`;
+            } else {
+                errorHandler.handleError(new Error('Attempted navigation to user page without user ID.'));
+                return `/not-found`;
+            }
+            },
+        },
+        { path: "user/:userId", component: OtherComponent },
+    ];
  */
