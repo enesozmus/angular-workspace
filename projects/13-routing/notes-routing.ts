@@ -203,6 +203,11 @@
     ];
  */
 
+/** 🔴 Accessing Parent Route Data From Inside Nested Routes
+ * TasksComponent
+ * ApplicationConfig
+ */
+
 /** 🔴 Absolute and Relative Route Paths
  * Angular geliştirmede, rotalar arasında gezinmeyi yönetmek temel bir beceridir.
  * Geliştiricilerin sıklıkla karşılaştığı iki kritik kavram relative ve absolute path'lerdir.
