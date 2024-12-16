@@ -172,4 +172,7 @@
     data from resolvers
 
 
+ * ActivatedRoute
+ * Bir çıkışta yüklenen bir component'le ilişkili bir rota hakkındaki bilgiye erişim sağlar.
+ * RouterState ağacını dolaşmak ve düğümlerden bilgi çıkarmak için kullanılır.
  */
