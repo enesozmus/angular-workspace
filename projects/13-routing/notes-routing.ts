@@ -172,7 +172,33 @@
     data from resolvers
 
 
- * ActivatedRoute
+ * 🔵 ActivatedRoute
  * Bir çıkışta yüklenen bir component'le ilişkili bir rota hakkındaki bilgiye erişim sağlar.
  * RouterState ağacını dolaşmak ve düğümlerden bilgi çıkarmak için kullanılır.
+ */
+
+/** 🔴 Nesting Routes
+ * Uygulamanız daha karmaşık hale geldikçe, root component'iniz dışındaki bir component'e relative rotalar oluşturmak isteyebilirsiniz.
+ * Bu tür nested rotalara child rotalar denir.
+ * Bu, AppComponent'deki <router-outlet> elementine ek olarak uygulamanıza ikinci bir <router-outlet> eklediğiniz anlamına gelir.
+ * Bir child rota, hem bir path'e hem de bir component'e ihtiyaç duyması bakımından diğer rotalar gibidir.
+ * Tek fark, child rotaları ana parent rota içindeki bir child array'ine yerleştirmenizdir.
+
+    const routes: Routes = [
+     {
+        path: 'first-component', // → main routes
+        component: FirstComponent, // this is the component with the <router-outlet> in the template
+        // → child routes
+        children: [
+        {
+            path: 'child-a', // child route path
+            component: ChildAComponent, // child route component that the router renders
+        },
+        {
+            path: 'child-b',
+            component: ChildBComponent, // another child route component that the router renders
+        },
+        ],
+     },
+    ];
  */
