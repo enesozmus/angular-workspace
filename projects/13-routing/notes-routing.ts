@@ -68,6 +68,20 @@
  * Temel bir kural olarak, her zaman en spesifikten en az spesifike doğru sıralamayı deneyin.
  */
 
+/** 🔴 Setting up wildcard routes
+ * İyi işleyen bir uygulama, (a well-functioning application) kullanıcılar uygulamanızın var olmayan
+ bir bölümüne gitmeye çalıştığında bunu zarif bir şekilde ele almalıdır.
+ * Bu işlevi uygulamanıza eklemek için bir joker rotası ayarlarsınız. (a wildcard route)
+ * Angular router'ı, istenen URL herhangi bir rotayla eşleşmediğinde bu rotayı seçer.
+ * İki yıldız işareti, **, Angular'a bu rota tanımının bir joker rota olduğunu belirtir.
+ * Component property'si için, uygulamanızdaki herhangi bir component'i tanımlayabilirsiniz. Yaygın seçenekler
+ arasında, kullanıcılarınıza 404 sayfası göstermek için tanımlayabileceğiniz uygulamaya özgü bir PageNotFoundComponent
+ veya uygulamanızın ana component'ine bir yönlendirme bulunur.
+
+    { path: '**', component: <component-name> }
+    { path: '**', component: PageNotFoundComponent }
+ */
+
 /** 🔴 RouterLink (directive)
  * Angular'da RouterLink, farklı bir rotaya bildirimsel olarak gitmek için bir directive'dir.
  * İlgili template'deki bir elemente uygulandığında, o elementi tanımlanan rotaya bir gezinme başlatan 
