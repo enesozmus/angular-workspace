@@ -327,7 +327,7 @@
 
 
  * 🟦🟦 snapshot
- * ActivatedRoute'un snapshot property'si ilgili rotanın mevcut-etkin-geçerli anlık görüntüsüdür.
+ * ActivatedRoute'un snapshot property'si, ilgili rotanın mevcut-etkin-geçerli anlık görüntüsüdür.
  * ActivatedRoute'da bulabileceğiniz her property ayrıca snapshot property'sinde de mevcuttur.
  * Ancak, snapshot'taki property'lerin hiçbiri observable değildir.
  * Rota her güncellendiğinde, Angular Router hem snapshot'ı hem de ActivatedRoute'u günceller.
@@ -341,6 +341,38 @@
       
 
  * 🟦🟦 url
+ * ActivatedRoute'un url property'si, ilgili rotayla eşleşen bir UrlSegment[] array'i döndüren bir Observable'dır.
+ * Bir UrlSegment, iki eğik çizgi (/.../.../.../) arasında bulunan bir URL'in herhangi bir parçasıdır.
+ * * UrlSegment → Tek bir URL segmentini temsil eder.
+
+        class UrlSegment {
+            override path: string;
+            override parameters: { [name: string]: string; };
+            readonly parameterMap: ParamMap;
+            toString(): string;
+        }
+
+ * * /products/1/detail/15?sort=sort#hello      → has four segments (products, 1, detail, 15)
+
+        this.activatedRoute.url.subscribe((data) => {
+            this.url = data;
+        });
+ 
+
+ * 🟦🟦 data
+ * ActivatedRoute'un data property'si, ilgili rotanın statik ve çözümlenmiş verilerinin bir Observable'dır.
+ * data property'sini kullanarak static veri gönderebiliriz. Bunu yapabilmek için ilk olarak rotaları oluştururken bunu tanımlamamız gerekir.
+    
+        { path: 'products', component: ProductComponent, data: { id: '1', data: 'Some data' },    //data to send }
+
+        this.activatedRoute.data.subscribe((data) => {
+            this.data = data;
+        });
+
+        
+ * 🟦🟦
+ * 
+ * 
  * 
  * 
  * 

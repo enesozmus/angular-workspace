@@ -6,7 +6,12 @@ import {
   input,
   OnInit,
 } from '@angular/core';
-import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
+import {
+  ActivatedRoute,
+  RouterLink,
+  RouterOutlet,
+  UrlSegment,
+} from '@angular/router';
 import { UsersService } from '../users.service';
 
 @Component({
@@ -65,10 +70,14 @@ export class UserTasksComponent implements OnInit {
     //   },
     // });
 
-    // console.log(this.activatedRoute.snapshot.paramMap);
-    // console.log(this.activatedRoute.snapshot.queryParamMap);
-    // console.log(this.activatedRoute.snapshot.fragment);
-    
+    // console.log('🎈', this.activatedRoute.snapshot.paramMap);
+    // console.log('🎈', this.activatedRoute.snapshot.queryParamMap);
+    // console.log('🎈', this.activatedRoute.snapshot.fragment);
+    // console.log('🎈', this.activatedRoute.snapshot.url);
+
+    // this.activatedRoute.url.subscribe((data: UrlSegment[]) => {
+    //   console.log('🎈', data);
+    // });
 
     // component: Type<any> | null
     // snapshot: ActivatedRouteSnapshot
