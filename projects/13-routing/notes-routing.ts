@@ -311,8 +311,22 @@
             this.sort1 = data['sort'];
         });
  
+
+ * 🟦🟦 fragment
+ * Fragment, # işaretinden sonra URL'in sonuna eklenen bir string'dir.
+ * + fragment observable'ı, kendisine abone olunduğunda (subscribe) ilgili fragment parametrelerini string veya null olarak döndürür.
+
+
+ * * /products#hello
+ * Bir fragment eklemek için routerLink directive'inin fragment property'sini kullanırız.
+        [routerLink]="['products']"  [fragment]="hello"
+ 
+        this.activatedRoute.fragment.subscribe((data) => {
+            this.fragment = data;
+        });
+
+
  * 🟦🟦
- * 
  * 
  * 
  * 

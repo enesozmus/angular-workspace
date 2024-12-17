@@ -47,7 +47,6 @@ export class UserTasksComponent implements OnInit {
     });
     this.destroyRef.onDestroy(() => subscription.unsubscribe());
 
-
     // this.activatedRoute.paramMap.subscribe({
     //   next: (paramMap) => {
     //     console.log('🎈', paramMap);
@@ -57,6 +56,12 @@ export class UserTasksComponent implements OnInit {
     // this.activatedRoute.queryParamMap.subscribe({
     //   next: (paramMap) => {
     //     console.log('🎈', paramMap);
+    //   },
+    // });
+
+    // this.activatedRoute.fragment.subscribe({
+    //   next: (fragment) => {
+    //     console.log('🎈', fragment);
     //   },
     // });
 
