@@ -1,4 +1,5 @@
 import { Component, computed, DestroyRef, inject, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import { TasksService } from './tasks.service';
 import { TaskComponent } from './task/task.component';
@@ -8,7 +9,7 @@ import { TaskComponent } from './task/task.component';
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [TaskComponent],
+  imports: [TaskComponent, RouterLink],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css',
 })

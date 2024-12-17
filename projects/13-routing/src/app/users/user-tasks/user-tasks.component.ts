@@ -82,11 +82,11 @@ export class UserTasksComponent implements OnInit {
     // console.log('🎈', this.activatedRoute.routeConfig);
     // console.log('🎈', this.activatedRoute.outlet);
     // console.log('🎈', this.activatedRoute.component);
-    
-    console.log('🎈', this.activatedRoute.root);
-    console.log('🎈', this.activatedRoute.parent);
-    console.log('🎈', this.activatedRoute.firstChild);
-    console.log('🎈', this.activatedRoute.pathFromRoot);
+
+    // console.log('🎈', this.activatedRoute.root);
+    // console.log('🎈', this.activatedRoute.parent);
+    // console.log('🎈', this.activatedRoute.firstChild);
+    // console.log('🎈', this.activatedRoute.pathFromRoot);
 
     // component: Type<any> | null
     // snapshot: ActivatedRouteSnapshot
