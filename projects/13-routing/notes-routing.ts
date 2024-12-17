@@ -172,7 +172,7 @@
         [routerLink]="['/users', user().id]" routerLinkActive="selected"
  */
 
-/** 🔴 Getting route information
+/** 🔴 Getting Route Information
  * Genellikle, bir kullanıcı uygulamanızda gezinirken, bir component'ten diğerine bilgi aktarmak istersiniz.
  * Bu tür bilgileri uygulama component'lerinize geçirebilmek için bir rota kullanabilirsiniz.
  * Bunu yapabilmek için, provideRouter ile withComponentInputBinding()'i ya da 
@@ -197,17 +197,90 @@
         })]
     })
 
- * 🔵 withComponentInputBinding()
+ * 🔴🔵 withComponentInputBinding()
  * Router durumundan gelen bilgilerin, Route yapılandırmalarındaki component input'larına doğrudan bağlanmasını sağlar.
-    query parameters
-    path and matrix parameters
-    static route data
-    data from resolvers
+    
+    . query parameters
+    . path and matrix parameters
+    . static route data
+    . data from resolvers
 
 
- * 🔵 ActivatedRoute
- * Bir çıkışta yüklenen bir component'le ilişkili bir rota hakkındaki bilgiye erişim sağlar.
- * RouterState ağacını dolaşmak ve düğümlerden bilgi çıkarmak için kullanılır.
+ * 🔴🔵🔵 ActivatedRoute 🔵🔵🔴
+ * Angular uygulamalarında, navigation, farklı view'lar ve component'ler arasında kolayca hareket etmeye gezinmeye
+ yardımcı olan temel bir özelliktir.
+ * ActivatedRoute class'ı bu gezinme sürecinde önemli bir rol oynar ve rota parametreleri, sorgu parametreleri ve
+ diğer rotaya özgü meta veriler dahil olmak üzere geçerli rota hakkında değerli bilgiler sağlar.
+ 
+ * ActivatedRoute, '@angular/router' tarafından sağlanan bir service'tir ve Şu anda yüklenen component'le ilişkili 
+ mevcut-aktif-etkin rotayı temsil eder.
+ * Kullanıcı farklı bir rotaya gittiğinde, Angular RouterModule geçerli rotanın bilgilerini içeren ActivatedRoute
+ instance'ını günceller.
+
+    . Accessing the URL
+    . Accessing Route Parameters → For example, in the URL /users/:id, id is a route parameter.
+    . Accessing Query Parameters → For example, in the URL /search?q=angular, q is a query parameter.
+    . Accessing URL Fragments
+    . Accessing Route Data
+    . Observing Route Changes
+
+ * ActivatedRoute'u service'ini kullanabilmek için onu constructor üzerinden veya inject mekanizması
+ üzerinden ilgili component class'ına enjekte etmemiz gerekir.
+ * ActivatedRoute, Angular'daki '@angular/router'ın bir parçasıdır.
+
+        params: Observable
+        paramMap: Observable
+        queryParams: Observable
+        queryParamMap: Observable
+        fragment: Observable
+        snapshot: ActivatedRouteSnapshot
+        data: Observable
+        url: Observable
+        outlet: string
+        title: Observable
+        component: Type | null
+        root: ActivatedRoute
+        parent: ActivatedRoute | null
+        firstChild: ActivatedRoute | null
+        children: ActivatedRoute[]
+        pathFromRoot: ActivatedRoute[]
+
+ * 🟦🟦 paramMap & params
+ * paramMap ve params, abone olunduğunda rota ile ilişkili rota parametrelerini döndüren observable ögelerdir.
+ * paramMap observable'ı kendisine abone olunduğunda (subscribe) rota parametresini bir paramMap nesnesi olarak döndürür.
+ * paramMap nesnesi, ilgili rotanın rota parametrelerinin bir haritasıdır.
+ * Belirli bir rotayı okumak için get() fonksiyonunu veya tüm rotaları okumak için getAll() fonksiyonunu kullanabilirsiniz.
+ 
+ * params observable'ı, rota parametresini bir params koleksiyonu olarak döndürür. Adına göre dizinlenmiş bir rota parametreleri koleksiyonudur.
+ * * For example, in the URL /users/:id, 'id' is a route parameter.
+
+        this.activatedRoute.paramMap.subscribe((data) => {
+            this.id1 = data.get('id');
+            this.product = this.productService.getProduct(this.id1);
+        });
+
+        this.activatedRoute.params.subscribe((data) => {
+            this.id2 = data['id'];
+        });
+ 
+        const subscription = this.activatedRoute.paramMap.subscribe({
+            next: (paramMap) => {
+                this.userName = this.usersService
+                                            .users
+                                                .find((u) => u.id === paramMap.get('userId'))?.name || '';
+            },
+        });
+
+ * 🟦🟦
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
  */
 
 /** 🔴 Nesting Routes
