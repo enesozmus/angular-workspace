@@ -228,29 +228,46 @@
  üzerinden ilgili component class'ına enjekte etmemiz gerekir.
  * ActivatedRoute, Angular'daki '@angular/router'ın bir parçasıdır.
 
-        params: Observable
-        paramMap: Observable
-        queryParams: Observable
-        queryParamMap: Observable
-        fragment: Observable
-        snapshot: ActivatedRouteSnapshot
-        data: Observable
-        url: Observable
-        outlet: string
-        title: Observable
-        component: Type | null
-        root: ActivatedRoute
-        parent: ActivatedRoute | null
-        firstChild: ActivatedRoute | null
-        children: ActivatedRoute[]
-        pathFromRoot: ActivatedRoute[]
+        class ActivatedRoute {
+            snapshot: ActivatedRouteSnapshot;
+            readonly title: Observable<string | undefined>;
+            url: Observable<UrlSegment[]>;
+            params: Observable<Params>;
+            queryParams: Observable<Params>;
+            fragment: Observable<string | null>;
+            data: Observable<Data>;
+            override outlet: string;
+            override component: Type<any> | null;
+            readonly routeConfig: Route | null;
+            readonly root: ActivatedRoute;
+            readonly parent: ActivatedRoute | null;
+            readonly firstChild: ActivatedRoute | null;
+            readonly children: ActivatedRoute[];
+            readonly pathFromRoot: ActivatedRoute[];
+            readonly paramMap: Observable<ParamMap>;
+            readonly queryParamMap: Observable<ParamMap>;
+            toString(): string;
+        }
+
+        
+ * 🟦🟦🟦 ParamMap 🟦
+ * + paramMap interface'i, ilgili rotaya özgü gerekli ve isteğe bağlı parametrelere erişim sağlamaya olanak tanıyan
+ ilgili parametrelerin bir haritasıdır.
+ * Belirli bir rotayı okumak için get() fonksiyonunu, tüm rotaları okumak için ise getAll() fonksiyonunu kullanabilirsiniz.
+ * Belirli bir rota parametresinin var olup olmadığını kontrol etmek için de has() fonksiyonunu kullanabilirsiniz.
+
+        interface ParamMap {
+            has(name: string): boolean;
+            get(name: string): string | null;
+            getAll(name: string): string[];
+            readonly keys: string[];
+        }
+
 
  * 🟦🟦 paramMap & params
  * paramMap ve params, abone olunduğunda rota ile ilişkili rota parametrelerini döndüren observable ögelerdir.
- * paramMap observable'ı kendisine abone olunduğunda (subscribe) rota parametresini bir paramMap nesnesi olarak döndürür.
- * paramMap nesnesi, ilgili rotanın rota parametrelerinin bir haritasıdır.
- * Belirli bir rotayı okumak için get() fonksiyonunu veya tüm rotaları okumak için getAll() fonksiyonunu kullanabilirsiniz.
- 
+ * + paramMap observable'ı kendisine abone olunduğunda (subscribe) ilgili rota parametrelerini bir paramMap nesnesi olarak döndürür.
+
  * params observable'ı, rota parametresini bir params koleksiyonu olarak döndürür. Adına göre dizinlenmiş bir rota parametreleri koleksiyonudur.
  * * For example, in the URL /users/:id, 'id' is a route parameter.
 
@@ -271,11 +288,30 @@
             },
         });
 
+
+ * 🟦🟦 queryParamMap & queryParams
+ * queryParamMap ve queryParams abone olunduğunda rotayla ilişkili sorgu parametrelerini döndüren observable'lardır.
+ * + queryParamMap observable'ı kendisine abone olunduğunda (subscribe) ilgili sorgu parametrelerini bir paramMap nesnesi olarak döndürür.
+ 
+ * queryParams observable'ı, sorgu parametresini params koleksiyonunda döndürür.
+
+* Bir query string eklemek için routerLink directive'inin queryParams property'sini kullanırız.
+        <a [routerLink]="['products']" [queryParams]="{ sort:sort }"
+ * Sorgu parametreleri, bir URL'deki ? işaretinin sağında görünen anahtar-değer çiftleridir.
+ * Her sorgu parametresi & ile ayrılır.
+ * * /product?page=2&filter=all
+        → İki sorgu parametresi içerir. Biri değeri 2 olan page, diğeri değeri all olan filter'dir.
+ 
+        this.activatedRoute.queryParamMap.subscribe((data) => {
+            this.sort = data.get('sort');
+            this.products = this.productService.getProducts();
+        });
+
+        this.activatedRoute.queryParams.subscribe((data) => {
+            this.sort1 = data['sort'];
+        });
+ 
  * 🟦🟦
- * 
- * 
- * 
- * 
  * 
  * 
  * 

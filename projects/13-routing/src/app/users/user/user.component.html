@@ -1,5 +1,8 @@
 <div>
-  <a [routerLink]="['/users', user().id, 'tasks']" routerLinkActive="selected">
+  <!--
+  🎈 TEST → <a [routerLink]="['/users', user().id, 'tasks']" [queryParams]="{ sort:'sort' }" routerLinkActive="selected">
+  -->
+  <a [routerLink]="['/users', user().id, 'tasks']" [queryParams]="{ sort:'sort' }" routerLinkActive="selected">
     <img [src]="imagePath()" [alt]="user().name" />
     <span>{{ user().name }}</span>
   </a>

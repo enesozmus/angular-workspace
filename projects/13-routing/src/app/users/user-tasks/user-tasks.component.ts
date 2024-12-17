@@ -47,6 +47,19 @@ export class UserTasksComponent implements OnInit {
     });
     this.destroyRef.onDestroy(() => subscription.unsubscribe());
 
+
+    // this.activatedRoute.paramMap.subscribe({
+    //   next: (paramMap) => {
+    //     console.log('🎈', paramMap);
+    //   },
+    // });
+
+    // this.activatedRoute.queryParamMap.subscribe({
+    //   next: (paramMap) => {
+    //     console.log('🎈', paramMap);
+    //   },
+    // });
+
     // component: Type<any> | null
     // snapshot: ActivatedRouteSnapshot
     // url: Observable<UrlSegment[]>
