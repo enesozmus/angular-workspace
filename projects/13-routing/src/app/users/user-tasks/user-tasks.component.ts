@@ -65,6 +65,11 @@ export class UserTasksComponent implements OnInit {
     //   },
     // });
 
+    // console.log(this.activatedRoute.snapshot.paramMap);
+    // console.log(this.activatedRoute.snapshot.queryParamMap);
+    // console.log(this.activatedRoute.snapshot.fragment);
+    
+
     // component: Type<any> | null
     // snapshot: ActivatedRouteSnapshot
     // url: Observable<UrlSegment[]>

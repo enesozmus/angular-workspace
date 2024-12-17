@@ -326,7 +326,21 @@
         });
 
 
- * 🟦🟦
+ * 🟦🟦 snapshot
+ * ActivatedRoute'un snapshot property'si ilgili rotanın mevcut-etkin-geçerli anlık görüntüsüdür.
+ * ActivatedRoute'da bulabileceğiniz her property ayrıca snapshot property'sinde de mevcuttur.
+ * Ancak, snapshot'taki property'lerin hiçbiri observable değildir.
+ * Rota her güncellendiğinde, Angular Router hem snapshot'ı hem de ActivatedRoute'u günceller.
+ * Observable kullanmanın avantajı, değerler değiştiğinde bildirim almanızdır; bu da ilgili component'i
+ buna göre güncelleyebilmenize yardımcı olur.
+
+        ngOnInit() {
+            this.sort     = this.activatedRoute.snapshot.queryParams["sort"];
+            this.fragment = this.activatedRoute.snapshot.fragment;
+        }
+      
+
+ * 🟦🟦 url
  * 
  * 
  * 
