@@ -211,6 +211,9 @@
  yardımcı olan temel bir özelliktir.
  * ActivatedRoute class'ı bu gezinme sürecinde önemli bir rol oynar ve rota parametreleri, sorgu parametreleri ve
  diğer rotaya özgü meta veriler dahil olmak üzere geçerli rota hakkında değerli bilgiler sağlar.
+ * Angular, gezindiğimiz her bir rota için ayrı bir ActivatedRoute instance'ı oluşturur.
+ * Uygulama öz-yüklemesini ( bootstrap) yapıp ayağa kalktığında ve ilk sayfaya (/) gittiğinde, Angular kök
+ ActivatedRoute instance'ını oluşturur.
  
  * ActivatedRoute, '@angular/router' tarafından sağlanan bir service'tir ve Şu anda yüklenen component'le ilişkili 
  mevcut-aktif-etkin rotayı temsil eder.
@@ -415,6 +418,23 @@
                 {provide: TitleStrategy, useClass: TemplatePageTitleStrategy},
             ]
         };
+
+
+ * 🟦🟦 root, parent, firstChild, children, pathFromRoot
+ * * Angular, gezindiğimiz her bir rota için ayrı bir ActivatedRoute instance'ı oluşturur.
+ * Uygulama öz-yüklemesini ( bootstrap) yapıp ayağa kalktığında ve ilk sayfaya (/) gittiğinde,
+ Angular kök ActivatedRoute instance'ını oluşturur.
+ * Ürünler rotasına (/products) geçtiğimizde, ürünler rotası için başka bir ActivatedRoute instance'ı
+ oluşturur ve bunu kök ActivatedRoute instance'ının child'ı olarak ekler.
+ * Ürün ayrıntıları rotasına (/products/detail/1) geçtiğimizde, başka bir ActivatedRoute instance'ı
+ oluşturur ve bunu (/products)'ın ActivatedRoute instance'ına ekler.
+ * Ve nihayetinde bir Tree of Activated Routes oluşur.
+
+        root: 		    → The root of the router state.
+        parent: 		→ The parent of this route in the router state tree.
+        firstChild:		→ The first child of this route in the router state tree
+        children: 	    → The children of this route in the router state tree.
+        pathFromRoot:   → The path from the root of the router state tree to this route.
  */
 
 /** 🔴 Nesting Routes
