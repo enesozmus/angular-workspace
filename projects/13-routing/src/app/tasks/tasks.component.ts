@@ -18,6 +18,7 @@ export class TasksComponent {
   // 🔺 Because by default 'child routes' do not receive those path parameters as input.
   // Parent component'in rota bilgilerini kullanmak istiyorsanız, router paramsInheritanceStrategy seçeneğini ayarlamanız gerekir: withRouterConfig({paramsInheritanceStrategy: 'always'})
   userId = input.required<string>();
+  order = input<'asc' | 'desc'>();
   userTasks = computed(() =>
     this.tasksService.allTasks().filter((task) => task.userId === this.userId())
   );
