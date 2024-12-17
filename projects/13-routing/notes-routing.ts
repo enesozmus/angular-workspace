@@ -388,9 +388,33 @@
         this.activatedRoute.outlet
    
 
- * 🟦🟦
- * 
- * 
+ * 🟦🟦 title
+ * Uygulamanızdaki her sayfanın tarayıcı geçmişinde tanımlanabilmesi için benzersiz bir başlığı olmalıdır.
+ * Router, Route yapılandırmasındaki title özelliğini kullanarak belgenin başlığını ayarlar.
+ 
+        { path: 'first-component', title: 'First component', component: FirstComponent },
+
+ * * You can also provide a custom title strategy by extending the TitleStrategy
+
+        @Injectable({providedIn: 'root'})
+        export class TemplatePageTitleStrategy extends TitleStrategy {
+            constructor(private readonly title: Title) {
+                super();
+            }
+            override updateTitle(routerState: RouterStateSnapshot) {
+                const title = this.buildTitle(routerState);
+                if (title !== undefined) {
+                this.title.setTitle(`My Application | ${title}`);
+                }
+            }
+        }
+            
+        export const appConfig: ApplicationConfig = {
+            providers: [
+                provideRouter(routes),
+                {provide: TitleStrategy, useClass: TemplatePageTitleStrategy},
+            ]
+        };
  */
 
 /** 🔴 Nesting Routes
