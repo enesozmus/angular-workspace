@@ -370,11 +370,25 @@
         });
 
         
+ * 🟦🟦 routeConfig
+ * ActivatedRoute'un routeConfig property'si, ilgili rotayla eşleşen rota yapılandırmasını Route türünde döndürür.
+ 
+        this.activatedRoute.routeConfig;
+
+
+ * 🟦🟦 outlet
+ * * Multiple Router Outlet
+ * ActivatedRoute'un outlet property'si, ilgili component'in yüklendiği outlet'in adını string olarak döndürür.
+ * Evet, hangi component'in hangi route outlet alanında yayınlanacağı outlet name'i üzerinden belirlenebilmektedir.
+ * Adlandırılmış bir outlet oluşturabilmek için, öncelikle rotalar tablosunda tanımlamamız gerekir.
+ 
+        { path: 'products', component: ProductComponent, outlet:'prddetail' }
+        <router-outlet name="prddetail'></router-outlet>
+        [routerLink]="[ {outlets:{prddetail: ['detail', product.productID]}}]"
+        this.activatedRoute.outlet
+   
+
  * 🟦🟦
- * 
- * 
- * 
- * 
  * 
  * 
  */

@@ -79,6 +79,9 @@ export class UserTasksComponent implements OnInit {
     //   console.log('🎈', data);
     // });
 
+    // console.log('🎈', this.activatedRoute.routeConfig);
+    // console.log('🎈', this.activatedRoute.outlet);
+
     // component: Type<any> | null
     // snapshot: ActivatedRouteSnapshot
     // url: Observable<UrlSegment[]>
