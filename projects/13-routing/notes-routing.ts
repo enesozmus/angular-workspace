@@ -704,3 +704,21 @@
         { path: "user/:userId", component: OtherComponent },
     ];
  */
+
+/** 🔴 Angular Route Guards
+ * Angular Route Guard, çeşitli koruma türleri sağlayarak çeşitli koşulları ele alabilmenize olanak sağlayarak
+ uygulamanızdaki gezinmeyi kontrol etmek için sağlam bir yol sağlar.
+ * Angular'da, bir guard esasen rota navigation'ının belirli aşamalarından önce çalışan bir betiktir.
+ * Angular'da, bir guard bir kullanıcının belirli bir rotaya gidip gidemeyeceğini veya rotadan uzaklaşıp
+ uzaklaşamayacağını kontrol eder.
+ * Dolayısıyla Angular Route Guards, kullanıcıların belirli koşullar altında uygulamaların belirli bölümlerine
+ erişip-erişemeyeceğine karar vermek için ve ilgili rotaya gitmeden veya rotadan ayrılmadan önce bazı eylemler
+ gerçekleştirebilmek için yollar sağlar.
+
+    . CanActivate
+    . CanActivateChild
+    . CanDeactivate
+    . CanLoad
+    . CanMatch
+    . Resolve
+ */
