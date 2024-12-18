@@ -28,6 +28,7 @@ export class UserTasksComponent implements OnInit {
   //   console.log(uid);
   // }
   userId = input.required<string>();
+  message = input.required<string>();
   private usersService = inject(UsersService);
 
   private activatedRoute = inject(ActivatedRoute);
@@ -39,6 +40,7 @@ export class UserTasksComponent implements OnInit {
   // );
 
   ngOnInit(): void {
+    console.log('🎈Input Data: ', this.message());
     // console.log(this.activatedRoute);
     // console.log(this.activatedRoute.component);
     // console.log(this.activatedRoute.snapshot);
