@@ -118,6 +118,14 @@ export const resolveUserName: ResolveFn<string> = (
   return userName;
 };
 
+// modern way
+export const resolveTitle: ResolveFn<string> = (
+  activatedRouteSnapshot,
+  routerStateSnapshot
+) => {
+  return resolveUserName(activatedRouteSnapshot, routerStateSnapshot) + '\'s Tasks'
+}
+
 // class-based
 // @Injectable({ providedIn: 'root' })
 // export class UserNameResolver implements Resolve<string> {
