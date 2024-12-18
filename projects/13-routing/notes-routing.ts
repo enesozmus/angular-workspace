@@ -721,4 +721,79 @@
     . CanLoad
     . CanMatch
     . Resolve
+
+
+    import { CanActivate } from '@angular/router';
+
+    @Injectable()
+    export class ProductGuardService implements CanActivate {
+        canActivate(): boolean {    
+            // 🎈 Check weather the route can be activated;    
+            return true;     
+            // 🎈 or false if you want to cancel the navigation;
+            return false;
+            // 🎈 or navigate elsewhere
+            const router = inject(Router);
+            return new RedirectCommand(router.parseUrl('/unauthorized'));
+        }
+    }
+
+
+ * 🔵🔵 CanActivate
+ * Bir class'ın ilgili rotanın etkinleştirilip etkinleştirilemeyeceğine karar veren bir guard olarak
+ uygulayabileceği interface.
+ * Tüm guard'lar true dönerse gezinme devam eder. Herhangi bir guard false dönerse gezinme iptal edilir.
+ * Herhangi bir guard bir UrlTree döndürürse, geçerli gezinme iptal edilir ve guard'dan döndürülen UrlTree'ye yeni
+ bir gezinme başlar.
+ * İlgili component'i kullanıcıya göstermeden önce bazı koşulları kontrol etmek istediğimizde bu korumayı kullanırız.
+ 
+    . Bir kullanıcının oturum açıp açmadığını kontrol etme
+    . Bir kullanıcının izni olup olmadığını kontrol etme
+
+    interface CanActivate {
+        canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<GuardResult>;
+    }
+
+    // 🎈 modern way
+    export const yourGuardFunction: CanActivateFn = ( next: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+      // ...your  logic goes here
+      ...
+   }
+    → { path: '/your-path', component: YourComponent, canActivate: [yourGuardFunction], }
+
+    // 🎈 class-based
+    @Injectable({ providedIn: 'root' })
+    class CanMatchTeamSection implements CanMatch {
+        constructor(private router: Router) {}
+        canMatch(route: Route, segments: UrlSegment[]) {
+            const shouldGetAccess = Math.random();
+            if (shouldGetAccess < 0.5) {
+            return true;
+            }
+            return new RedirectCommand(this.router.parseUrl('/unauthorized'));
+        }
+    }
+     → canMatch: [CanMatchTeamSection]
+    
+
+ * 🔵🔵 CanActivateChild
+ * CanActivate'e benzer, ancak alt rotalarda çalışır.
+ * Birden fazla alt rotası olan ana rotalar için kullanışlıdır.
+ 
+ * 🔵🔵 CanDeactivate
+ * CanDeactivate, kullanıcının ilgili component'i terk edip edemeyeceğine (geçerli rotadan uzaklaşıp uzaklaşamayacağına)
+ karar verir.
+ * Genellikle kullanıcıyı kaydedilmemiş değişiklikler konusunda uyarmak için kullanılır.
+ 
+ * 🔵🔵 CanLoad
+ * CanLoad, bir modülün-component'in tembel yüklenip yüklenmeyeceğini kontrol eder.
+ * Bu, yetkisiz kullanıcıların uygulamanızın bölümlerini indirmesini önlemek istiyorsanız önemlidir.
+ 
+ * 🔵🔵 CanMatch
+ * Bir class'ın ilgili rotanın eşleştirilip eşleştirilemeyeceğine karar veren bir guard olarak uygulayabileceği interface.
+ 
+ * 🔵🔵 Resolve
+ * Resolve guard'ı, bazı görevler tamamlanana kadar rotanın etkinleştirilmesini geciktirir.
+ * Rotayı etkinleştirmeden önce back-end API'ından verileri önceden almak için kullanabilirsiniz.
+ * Veriler rota parametrelerini doldurmak için kullanılabilir.
  */
