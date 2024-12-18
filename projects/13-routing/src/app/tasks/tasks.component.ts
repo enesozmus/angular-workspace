@@ -36,9 +36,9 @@ export class TasksComponent implements OnInit {
       .filter((task) => task.userId === this.userId())
       .sort((a, b) => {
         if (this.order() === 'desc') {
-          return a.id > b.id ? -1 : 1;
+          return a.dueDate > b.dueDate ? -1 : 1;
         } else {
-          return a.id > b.id ? 1 : -1;
+          return a.dueDate > b.dueDate ? 1 : -1;
         }
       })
   );
