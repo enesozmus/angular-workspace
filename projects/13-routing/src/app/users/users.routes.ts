@@ -15,7 +15,8 @@ export const routes: Routes = [
   {
     path: 'tasks', // <your-domain>/users/<uid>/tasks
     component: TasksComponent,
-    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+    // runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+    runGuardsAndResolvers: 'always',
     resolve: {
       // 🔺 Bir sorgu (query) parametresi çalıştığında tekrar-tekrar çalışmaz.
       userTasks: resolveUserTasks,
