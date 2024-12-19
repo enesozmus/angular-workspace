@@ -41,4 +41,46 @@
   </p>
 </section>
 
-<app-offer-preview />
+<!--
+@defer(on viewport) {
+  <app-offer-preview />
+} @placeholder {
+  <p class="fallback">We might have an offer...</p>
+} -->
+<!--
+@defer(on interaction) {
+  <app-offer-preview />
+} @placeholder {
+  <p class="fallback">We might have an offer...</p>
+} -->
+
+@defer(on interaction; prefetch on hover) {
+  <app-offer-preview />
+} @placeholder {
+  <p class="fallback">We might have an offer...</p>
+}
+
+
+<!--
+  🔴🔴 Deferrable Views (Angular 17 or higher)
+ * Bir sayfanın ilk işlenmesi için kesinlikle gerekli olmayan kodun yüklenmesini erteleyerek uygulamanızın
+ ilk paket boyutunu azaltır
+ * Bu özelliği kullanabilmek için şablonunuzun istediğiniz bölümünü @defer bloğuna bildirimsel olarak
+ sarabilirsiniz:
+
+      @defer {
+        <large-component />
+      }
+
+ * @defer(){} bloğunun içindeki tüm component'ler, directive'ler ve pipe'lar için kod ayrı bir JavaScript
+ dosyasına bölünür ve şablonun geri kalanı işlendikten sonra yalnızca gerektiğinde yüklenir.
+ * @defer bloğundaki bağımlılıkların ertelenebilmesi için iki koşulu karşılamaları gerekir:
+
+  1. Standalone olmaları gerekir. Standalone olmayan bağımlılıklar ertelenemez ve @defer blokları
+  içinde olsalar bile yine de istekli bir şekilde yüklenirler.
+  2. Aynı dosya içinde @defer blokları dışında başvurulamazlar.
+
+  @defer bloğunda kullanılan component, directive ve pipe'ların geçişli bağımlılıklarının kesinlikle
+standalone olması gerekmez; transitive dependencies yine de bir NgModule'de bildirilebilir ve ertelenmiş
+yüklemeye katılabilir.
+ -->
