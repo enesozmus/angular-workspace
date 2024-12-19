@@ -15,10 +15,14 @@ export const routes: Routes = [
   {
     path: 'tasks', // <your-domain>/users/<uid>/tasks
     component: TasksComponent,
+    // 🔻 aşağıdaki resolveUserName aktarmasından dolayı burada lazy-loading çok da anlamlı değildir.
+    // 🔻 burada lazy-loading yüklemeye çalıştığınız şeyin başka yerlerde hevesle çağrılmadığından emin olmanız gerekir.
+    // loadComponent: () => import('./tasks/tasks.component').then(c => c.TasksComponent),
+
     // runGuardsAndResolvers: 'paramsOrQueryParamsChange',
     runGuardsAndResolvers: 'always',
     resolve: {
-      // 🔺 Bir sorgu (query) parametresi çalıştığında tekrar-tekrar çalışmaz.
+      // 🔻 Bir sorgu (query) parametresi çalıştığında tekrar-tekrar çalışmaz.
       userTasks: resolveUserTasks,
     },
     // title: 'Task Bileseni'

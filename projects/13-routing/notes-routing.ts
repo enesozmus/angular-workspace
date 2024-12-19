@@ -797,3 +797,25 @@
  * Rotayı etkinleştirmeden önce back-end API'ından verileri önceden almak için kullanabilirsiniz.
  * Veriler rota parametrelerini doldurmak için kullanılabilir.
  */
+
+/** 🔴 Angular Lazy Loading
+ * Angular, bir Single-Page-Application oluşturduğundan, uygulamanın tüm bileşenleri aynı anda yüklenir.
+ * Bu, başlangıç veya bir T noktasında gerekmediği halde birçok gereksiz kitaplık veya modülün de yüklenebileceği anlamına gelir.
+ * Küçük bir uygulama için bu sorun olmaz. Ancak uygulama büyüdükçe, her şey aynı anda yüklenirse yükleme süresi artacak ve
+ performans kaybı yaşanacaktır.
+ * Lazy loading, bir web sitesinin bileşenlerini, modüllerini veya diğer varlıklarını ihtiyaç duyuldukça yükleme işlemidir.
+ * Amaç uygulamanın açılış süresini iyileştirmek, gezinme hızını artırmak ve nihayetinde performans kazanmaktır.
+ * Rotaları tanımlarken, tembel yüklemek istediğimiz modülleri tanımlarız.
+
+        - Angular 7
+        {path: "admin", loadChildren:'./admin/admin.module#AdminModule'},
+
+        - Angular 8
+        {path: "admin", loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)},
+
+        - modern way
+        🔻 burada lazy-loading yüklemeye çalıştığınız şeyin başka yerlerde hevesle çağrılmadığından emin olmanız gerekir.
+        loadComponent: () => import('./tasks/tasks.component').then(c => c.TasksComponent),
+        🔻 Lazy Loading Entire Route Groups
+        loadChildren: () => import('./users/users.routes').then((mod) => mod.routes),
+ */

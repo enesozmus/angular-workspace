@@ -21,6 +21,9 @@ export const routes: Routes = [
   {
     path: 'users/:userId', // <your-domain>/users/<uid>
     component: UserTasksComponent,
+    // 🔻 Lazy Loading Entire Route Groups
+    // loadChildren: () =>
+    //   import('./users/users.routes').then((mod) => mod.routes),
     children: userRoutes,
     data: {
       message: 'hello',
