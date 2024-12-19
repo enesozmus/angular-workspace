@@ -1,0 +1,54 @@
+/* <!-- ========= Google Font ========= --> */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@400;700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  vertical-align: baseline;
+  font: inherit;
+  font-size: 100%;
+  text-decoration: none;
+  border: 0 none;
+  outline: 0;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+  /* ⭕️ windows performance settings ⭕️ */
+  scroll-behavior: smooth;
+  height: 100%;
+
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.7rem;
+  line-height: 1.5;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeSpeed;
+
+  color: #f3e4ef;
+  background: radial-gradient(circle at top left, #2c0628, #0b0519);
+  margin-bottom: 10rem;
+}
+
+.fallback {
+  text-align: center;
+  color: #c1b3bf;
+}
